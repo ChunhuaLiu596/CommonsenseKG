@@ -1,0 +1,2400 @@
+conditional	subjunctive	2
+cherry	blossom	8
+unite	company	2
+dart	sewing	2
+orphanage	loneliness	4
+disapproval	bad	8
+electric	zap	2
+programming	java	2
+treachery	murder	2
+principal	school	49
+oatmeal	hearty	2
+hoarse	scratchy	10
+unhappiness	happiness	4
+grief	anguish	2
+noon	middle	2
+artillery	battle	2
+phenomenon	extraordinary	2
+venison	stew	5
+points	geometry	3
+agreement	mutual	3
+verandah	sun	8
+floppy	soft	8
+retire	end	9
+have	was	2
+governance	authority	6
+oneself	himself	3
+demonstrate	learn	2
+elevation	above	2
+guild	build	3
+sail	away	13
+disbelieve	question	3
+impressive	grandeur	2
+simplicity	white	7
+join	wed	5
+mannerism	habits	3
+damp	dry	5
+however	notwithstanding	4
+steeple	staple	2
+meager	few	5
+rhythmic	soothing	2
+ponytail	child	2
+blemish	acne	18
+monarchy	reign	3
+steel	beam	3
+choir	congregation	2
+expected	foreseen	2
+fabulous	marvelous	3
+weapon	ammo	2
+handsome	gentleman	5
+nuts	allergies	3
+bleep	blip	4
+journal	articles	2
+guru	guide	2
+papaya	foreign	2
+cathedral	beautiful	7
+tissue	tears	2
+security	alarm	4
+reject	bad	2
+rampage	violence	3
+lightheaded	illness	3
+washing	machine	28
+unlock	key	60
+sissy	girl	19
+spirit	dead	2
+enjoyment	nice	2
+feud	battle	7
+exhaust	exhaustion	2
+converse	discussion	2
+uncover	expose	5
+elitist	best	4
+resourceful	practical	3
+indie	unique	2
+dignified	respect	2
+hippy	peace	13
+disbelief	mistrust	2
+evidence	present	2
+japan	islands	4
+buddhism	tree	2
+shine	metal	2
+trucks	diesel	3
+disown	shame	2
+documents	immigrant	2
+cactus	plant	30
+suspenders	germany	2
+justice	liberty	3
+peanut	sandwich	3
+choosy	food	3
+blockage	wall	4
+uncontrollable	free	5
+hypnotic	music	4
+foggy	weather	9
+my	his	7
+curve	learning	2
+stimulation	masturbate	2
+candidate	job	8
+polite	chivalry	2
+underwear	where	2
+questioning	asking	22
+mechanism	car	4
+cracked	split	4
+searching	look	10
+fate	future	4
+shutter	quiver	2
+exalt	excite	2
+worldwide	national	2
+condom	protect	2
+value	appreciate	4
+piracy	ship	12
+ink	blue	8
+pounds	thumps	2
+thrill	scream	4
+bell	cow	4
+swan	duckling	4
+cultural	norms	2
+so	when	2
+shoelace	sole	2
+glacier	melt	2
+creativity	fun	8
+vial	container	10
+pricey	rich	10
+floppy	pancake	2
+incline	slant	4
+tourist	london	3
+emerge	become	3
+tenacious	determined	19
+kisses	soft	3
+extraordinary	different	4
+decorative	fresco	2
+ants	flies	3
+compile	archive	2
+reading	information	2
+motivation	help	3
+pilgrim	travel	7
+currant	cranberry	2
+lag	lazy	3
+measles	dangerous	2
+polar	express	8
+tension	worry	2
+raid	viking	4
+cafeteria	tables	5
+grave	dirt	2
+parish	neighborhood	2
+listless	ill	2
+agreed	positive	4
+waffle	cream	2
+environmental	sustainability	3
+satisfying	happiness	3
+definitely	certainly	15
+doughnut	sugar	23
+stool	bowel	3
+reuse	refuse	4
+patriarchy	unfair	3
+suit	coat	5
+surrounded	friends	3
+bio	information	4
+promo	ticket	2
+half	slice	2
+reddish	radish	12
+motive	train	2
+evaporate	mist	4
+childhood	learning	3
+pitcher	tea	4
+satisfied	life	2
+schedule	rota	3
+barred	disallowed	4
+integral	fundamental	2
+lawyer	scum	2
+tablecloth	papery	2
+impoverished	poverty	11
+longer	ruler	5
+platypus	duckbill	8
+nightmare	child	2
+suspense	fear	5
+trim	fabric	2
+timber	axe	2
+mayhem	disorganized	2
+affection	desire	3
+recover	alcoholic	2
+clutter	room	3
+stimulant	sport	2
+suggestion	advice	19
+assert	firm	4
+sanitation	cleanliness	14
+generosity	smile	2
+gloss	skim	2
+apathetic	bored	16
+places	location	4
+donut	greasy	2
+poo	foul	2
+liver	organ	33
+pointer	computer	4
+donut	yummy	3
+disassociate	avoid	5
+tattoo	black	4
+graph	skin	2
+pat	hit	2
+maid	rich	3
+announce	share	2
+basement	flat	3
+spiritual	belief	3
+trial	court	38
+manly	tough	7
+country	fields	3
+cook	eat	14
+scientific	evidence	3
+federal	reserve	6
+vein	life	3
+comply	obey	26
+hotel	breakfast	2
+about	subject	4
+philosopher	plato	15
+bubblegum	toothpaste	2
+gemini	astrology	18
+recorder	camera	2
+superficial	superfluous	3
+unwise	misguided	2
+thicket	full	2
+homeless	food	2
+anagram	game	8
+always	permanent	2
+revolution	turn	9
+identify	body	3
+tower	height	4
+atmosphere	layer	2
+stag	hunt	4
+diesel	expensive	4
+mesh	chicken	3
+solutions	maths	2
+moldy	wet	5
+confound	angry	2
+inbox	email	62
+disturb	unwelcome	2
+cake	calories	2
+desktop	windows	4
+medal	olympic	2
+plenty	extra	3
+heritage	ancestry	15
+concave	lens	12
+talent	capability	2
+loyal	kind	2
+visual	optical	2
+viola	instrument	23
+crystal	light	2
+humid	home	2
+opulent	grand	2
+tap	push	2
+spain	bulls	6
+seed	harvest	5
+wrench	sprain	2
+gaze	smile	2
+coordinate	geometry	2
+brunch	mimosa	8
+floor	board	3
+citrus	summer	2
+biscuits	buttermilk	5
+handmade	crafted	6
+reception	guests	2
+bar	drunk	2
+brutal	bully	2
+exclamation	surprise	8
+chemist	lab	10
+slowly	gradually	2
+mozzarella	parmesan	2
+pets	responsibility	2
+pistachio	nuts	7
+inspector	morse	7
+satisfy	satiate	4
+monkeys	ape	4
+politician	lies	4
+eyesight	contacts	4
+leopard	majestic	2
+elastic	band	38
+concentrate	headache	2
+pants	underwear	6
+acute	urgent	3
+negative	energy	3
+confrontation	argue	7
+decisions	important	2
+accent	talk	3
+affordable	simple	2
+aquarium	sharks	2
+not	is	3
+slur	speech	14
+yen	travel	2
+amazing	awesome	20
+loneliness	introvert	2
+opening	ceremony	2
+bullseye	exactly	2
+swish	water	6
+insult	lie	2
+jealous	love	5
+laugh	cry	17
+immoral	loose	3
+time	measurement	2
+condition	medical	2
+courage	stupid	2
+confined	dark	2
+stubble	legs	3
+tupperware	mother	2
+vanish	fog	2
+clinging	stuck	7
+sadomasochism	man	3
+chivalrous	kind	10
+dope	dopey	2
+expectation	baby	2
+judo	asian	3
+feminine	eyes	3
+communist	manifesto	3
+insufficient	small	2
+democratic	republic	9
+precision	exactitude	2
+shops	retail	3
+monday	busy	2
+cord	string	12
+tot	potatoes	4
+mixed	jumbled	4
+utility	room	6
+habitual	frequent	3
+identification	face	5
+shots	hangover	2
+write	letter	20
+mayonnaise	yellow	5
+bubble	wrap	6
+gospel	preach	2
+gal	chick	6
+orbit	path	3
+creator	writer	5
+ridiculous	idiotic	4
+blossom	develop	2
+knees	skeleton	2
+debunk	true	2
+grit	nasty	2
+resolve	problem	13
+pathway	concrete	2
+admiral	army	8
+emotional	angry	4
+lips	chapped	5
+encourage	hope	7
+coating	skin	2
+mashed	smash	4
+metallic	plastic	3
+sports	dull	2
+spying	eavesdropping	2
+proxy	away	3
+furry	costume	3
+treachery	dishonesty	2
+teenage	crazy	3
+intoxicated	bar	3
+obama	democrat	10
+die	cast	6
+roundabout	dizzy	2
+campaign	smear	3
+concern	compassion	2
+infatuated	youth	2
+rat	tail	21
+junk	cheap	3
+encompass	encapsulate	2
+scattered	people	3
+spy	james	4
+sidewalk	trees	2
+noose	gallows	7
+thanksgiving	day	4
+zoom	quick	2
+grant	student	2
+ambiguous	amorphous	2
+prestige	class	8
+recession	slump	2
+childhood	toys	6
+nutmeg	cake	2
+compelled	involuntary	2
+milky	smooth	4
+grip	hands	2
+evaporate	cloud	4
+periodic	regularly	6
+suspicious	mind	4
+organ	internal	3
+hallmark	gift	2
+gunk	crud	3
+company	together	3
+broad	range	4
+empathetic	understanding	17
+aspirin	advil	3
+minerals	mining	12
+central	intelligence	2
+man	tall	2
+sarcastic	smartass	3
+deluge	noah	4
+metric	little	2
+designate	leader	7
+most	every	4
+inexperienced	innocent	2
+hanky	pansy	55
+till	until	35
+golfer	tiger	2
+tactic	cunning	3
+affectionate	warm	13
+rule	authority	2
+bun	butt	7
+friendship	bracelet	3
+taxation	relaxation	2
+putrid	bad	2
+weapons	kill	4
+bit	drill	8
+mammals	breasts	4
+interject	shout	5
+fresh	food	12
+terrorism	bombings	2
+joke	trick	4
+burning	forest	2
+superb	work	2
+contaminate	filthy	2
+food	comfort	2
+smirk	grin	22
+dolly	baby	3
+unworthy	bad	13
+fantastic	marvelous	6
+lever	metal	2
+amber	dog	2
+vengeance	hatred	2
+reddish	soil	2
+nightingale	mockingbird	3
+conflict	strife	8
+clamp	tighten	2
+grunt	underling	2
+cooperate	cooperative	2
+fruity	sweet	32
+g	g	2
+input	entry	3
+matrix	graph	3
+dedicated	hardworking	14
+vegetables	cucumber	3
+cheek	turn	5
+boulevard	way	2
+pizza	easy	2
+refresh	rate	2
+misery	dreary	2
+olive	skin	2
+gender	feminism	3
+serendipity	luck	15
+partially	halfway	2
+opponent	defeat	5
+chipmunk	brown	2
+boulevard	trees	6
+gardener	mexican	3
+crease	bent	2
+reproduce	kids	2
+withdrawn	isolated	8
+geek	games	2
+karma	religion	3
+kin	people	3
+issue	paper	3
+which	witch	23
+arab	dry	2
+scenery	green	10
+undress	cold	4
+involved	participate	6
+powerful	president	4
+honest	brave	2
+isolate	loneliness	2
+aching	old	5
+submarine	military	3
+jam	trouble	3
+withdrawn	shy	29
+leaning	learning	2
+hairdresser	barber	11
+tune	song	45
+missing	found	12
+invitation	ask	3
+means	end	10
+european	italian	8
+fixer	repairman	6
+donuts	cops	7
+tramp	poor	5
+robe	gown	9
+mediterranean	coast	2
+donuts	dunking	7
+product	hair	2
+salutation	dear	4
+mythical	old	2
+expel	rid	3
+unstable	jenga	2
+aloe	plant	41
+name	tag	6
+flawless	girl	2
+unfocused	vague	3
+chatting	internet	4
+stag	doe	8
+drawer	kitchen	5
+hour	clock	25
+morals	morality	4
+lame	pathetic	4
+memorable	mind	2
+nasty	dirty	19
+worn	patched	2
+notice	official	2
+la	smog	2
+osmosis	plant	3
+oppose	debate	3
+booth	car	2
+neptune	god	25
+thirty	adult	2
+tool	useful	5
+suits	pants	5
+undone	ended	2
+right	up	3
+trivial	little	2
+noisy	racket	3
+yiddish	europe	2
+weed	cannabis	5
+graft	bribery	2
+voter	right	2
+genetics	biology	14
+chainsaw	trees	10
+software	development	3
+syndrome	medical	4
+traitor	government	2
+genocide	crime	3
+incentive	payment	3
+cornfield	farmer	6
+romance	flowers	9
+link	hyper	2
+newton	apple	35
+narrow	door	2
+peace	content	2
+feral	rabid	3
+misty	haze	3
+slope	degree	3
+vision	eyes	41
+disintegrate	crumble	10
+murder	hate	3
+whiny	baby	11
+liability	injury	3
+wolf	forest	3
+chew	tobacco	10
+blossom	japan	3
+elope	wedding	13
+finances	spreadsheet	3
+tiny	little	24
+detective	police	33
+bedding	home	2
+hippopotamus	song	2
+ash	cloud	3
+backyard	grill	3
+intellectual	study	3
+between	rock	4
+suspenders	overalls	6
+bodily	corporal	2
+saw	three	2
+troubled	difficult	2
+cheesecake	delicious	13
+fingernail	chip	2
+dressy	business	2
+survivor	alive	11
+arachnid	crawling	2
+diplomat	emissary	2
+recent	immediate	3
+clay	earth	9
+shell	gas	3
+relentless	ocean	2
+coating	car	2
+breasts	small	2
+shaving	kit	2
+detain	arrest	22
+physically	able	7
+modern	ancient	2
+commission	government	4
+absolutely	indeed	2
+triad	tree	2
+citizen	voter	6
+darwin	species	6
+rue	hue	2
+vagina	opening	2
+penetration	intercourse	8
+sophistication	finesse	2
+robber	black	2
+lonely	isolated	5
+ash	blonde	2
+parade	candy	3
+werewolf	teen	2
+batter	fish	9
+morbid	depressed	2
+prescription	expensive	5
+sneakers	foot	2
+trip	beach	2
+stimulus	experiment	8
+tuck	snack	3
+bleed	nose	6
+mood	blues	4
+sheen	reflection	3
+ample	lots	17
+business	failure	2
+quest	trip	3
+shoddy	crappy	9
+nod	approval	3
+construction	built	2
+eat	delicious	2
+vapor	misty	2
+suggestion	helpful	4
+unknown	question	3
+triad	trio	6
+least	fewest	8
+vigilante	posse	2
+just	honorable	3
+epic	grand	7
+pulp	oranges	6
+diva	narcissist	2
+motivate	study	3
+destructive	fire	3
+feeding	nursing	3
+burglary	break	2
+tank	large	2
+palatable	tasty	39
+conscience	mind	18
+swirl	whirl	7
+lady	smell	2
+lobster	shell	2
+snooze	couch	3
+vegetables	cabbage	3
+dolphin	fin	4
+dedicated	commitment	2
+moonshine	jar	2
+zipper	fastener	3
+cheap	inexpensive	32
+shaman	indigenous	3
+anarchy	red	2
+bleep	noise	12
+energy	flow	2
+strawberry	blackberry	2
+agent	representative	17
+mumble	inaudible	5
+suspense	action	5
+sticky	stuck	6
+clown	colorful	3
+rusty	cracked	2
+superb	terrific	3
+dominate	sadism	2
+immobile	hurt	3
+odds	uneven	2
+uneducated	illiterate	13
+whirlpool	jacuzzi	9
+sweating	exercise	23
+scope	submarine	5
+revise	redo	11
+commute	traffic	11
+shrubbery	bushes	20
+tongue	kiss	14
+onset	early	8
+croissant	breakfast	16
+relativity	likeness	2
+liberal	lots	2
+graveyard	grave	3
+meme	hawkins	3
+front	war	9
+plea	knees	2
+apron	frilly	2
+friend	forever	3
+teens	numbers	3
+stories	myths	3
+copier	ink	10
+controls	manipulates	4
+mathematics	education	2
+hint	idea	4
+gooey	eggs	2
+covenant	religious	2
+blurry	smudge	4
+leech	doctor	2
+judgement	law	9
+aircraft	landing	2
+sweatshop	girls	2
+talent	america	2
+bash	hit	37
+dvd	television	6
+apricot	orange	28
+unaware	sleeping	2
+downstairs	bottom	2
+ugh	bad	2
+blob	mess	3
+tales	myths	4
+dna	makeup	3
+cluster	grouping	2
+clockwise	round	6
+organization	government	3
+brilliance	great	2
+to	give	5
+watermelon	pink	9
+vocal	talk	6
+lift	chair	2
+swag	gangster	3
+wispy	blonde	2
+bay	water	40
+ejaculation	blurt	2
+holiday	relaxation	2
+sulfur	eggs	18
+commence	journey	2
+growing	child	14
+maturity	respect	2
+half	glass	2
+aristocratic	snob	3
+rubbery	skin	2
+model	demonstrate	2
+panties	pants	2
+unfriendly	cruel	2
+fifth	place	4
+though	although	22
+karaoke	alcohol	2
+veggie	lettuce	4
+vintage	aged	3
+do	work	18
+bathtub	curtain	3
+talking	talk	2
+aries	god	9
+damn	beaver	7
+hairdresser	fun	2
+neutron	neuron	4
+precision	machine	2
+holocaust	destruction	3
+task	test	2
+goods	drugs	2
+colony	williamsburg	2
+whimsical	free	4
+cry	emotional	3
+album	collection	9
+opera	boring	4
+olympics	medal	8
+enthusiastic	overjoyed	2
+rectangular	box	25
+tropic	hawaiian	2
+chanting	enchanting	2
+blimp	zeppelin	14
+versus	you	2
+riches	coins	5
+magician	stage	3
+grate	nerves	9
+awkward	situation	3
+faulty	problem	2
+comics	drawings	4
+complete	success	2
+god	deity	16
+revenge	shakespeare	3
+downgrade	worse	5
+hatchet	survival	2
+glue	cow	2
+calm	peace	9
+acting	show	2
+ornate	delicate	3
+rival	competing	2
+deeply	totally	2
+riot	anger	5
+shaky	foundations	2
+pretender	magician	3
+interject	insert	4
+ratchet	increase	2
+maroon	pirate	2
+restart	life	2
+rush	canada	3
+seaside	seashell	3
+cakes	cream	3
+excited	children	3
+hypodermic	under	2
+viscous	angry	2
+foreground	scene	3
+java	coffee	79
+pledge	cleaner	2
+steak	house	4
+poised	perched	2
+penetrate	hole	8
+lumber	lumbar	2
+kindergarten	joy	2
+sovereign	self	2
+admiral	nelson	7
+effortless	graceful	2
+keg	tap	3
+filler	dip	2
+caress	soothe	2
+historic	stories	4
+epoch	historic	2
+muck	grime	4
+estate	grass	2
+adjustment	clothing	2
+outdoor	play	2
+thaw	unfreeze	2
+boxes	shipping	3
+pullover	dress	3
+monastery	god	2
+geology	gem	2
+available	accessible	4
+b	mine	2
+stroll	amble	10
+patty	cow	4
+tool	wrench	12
+curfew	teenagers	3
+tram	track	3
+alongside	ship	4
+bury	forget	2
+array	telescope	4
+yearning	year	3
+electric	gas	3
+delirious	ecstatic	4
+dream	bed	9
+hunger	yearning	2
+hammer	smash	3
+put	putt	2
+vegetable	cucumber	3
+cushion	comfort	5
+attached	combined	3
+motive	opportunity	2
+illogical	nonsense	11
+acrid	smoke	15
+empathy	crying	2
+anything	anywhere	2
+sides	teams	4
+learning	textbooks	3
+ghost	house	5
+overwhelmed	stress	13
+absurd	wrong	4
+platypus	cute	3
+fleece	golden	6
+bomber	weapons	2
+kernel	seed	14
+arena	football	15
+drunk	drinking	2
+everyday	always	15
+davidson	street	2
+crunch	chew	8
+coal	cave	2
+daisy	happy	2
+herd	cattle	20
+whiz	wow	2
+deviation	devil	2
+overdose	heroin	11
+goon	brute	3
+cassette	vhs	2
+evangelical	pray	2
+victor	medal	3
+pessimist	unhappy	6
+bushy	overgrown	4
+bouncy	flouncy	3
+vomit	yellow	5
+scrape	windshield	2
+chorus	dance	2
+vampire	sparkle	2
+snatch	fast	2
+welcome	greeting	9
+gourmet	epicure	2
+nuts	chocolate	2
+sweatshirt	cold	6
+hollow	blank	2
+proposal	wedding	25
+month	cycle	2
+mentality	attitude	13
+joe	person	2
+morbid	sad	11
+desperation	wanting	2
+haunted	woods	2
+package	parcel	11
+trash	recycle	9
+pole	barber	4
+plaid	pattern	9
+import	business	2
+zodiac	sign	36
+seam	rip	2
+program	plan	3
+midwest	wisconsin	2
+mail	postal	3
+history	dates	2
+skip	miss	6
+paycheck	good	2
+toenail	foot	34
+crochet	elderly	2
+chops	ability	2
+gruesome	blood	12
+magical	family	2
+taboo	inappropriate	2
+silk	clothes	7
+associate	colleague	23
+luggage	suitcases	2
+afford	cost	29
+antecedent	noun	2
+hollywood	money	7
+layer	clothes	5
+industrial	accident	2
+trombone	tuba	5
+may	permitted	2
+caribbean	water	10
+pierce	wound	2
+know	people	3
+bent	wire	2
+devoted	loving	12
+supportive	community	2
+gratuity	restaurant	11
+skyline	trees	3
+timetable	late	2
+anthem	patriotism	6
+cheers	salute	4
+issue	newspaper	5
+excise	customs	2
+unconscious	thoughtlessly	2
+crumb	cookie	14
+glance	first	2
+cutie	doll	2
+stimulate	nerve	2
+freak	deformed	2
+lubricate	moisten	6
+probability	chance	43
+rock	chair	2
+infatuated	amorous	2
+administration	principal	2
+theorize	conclude	2
+figure	think	10
+sewer	grate	7
+wages	compensation	3
+designate	allocate	5
+ringing	door	2
+ram	truck	7
+jock	jams	2
+radical	extreme	14
+lonely	man	2
+scour	rub	3
+salesperson	merchant	3
+plaster	build	2
+brand	shoes	2
+augment	breast	4
+selection	type	2
+comma	breath	2
+quarterback	football	77
+aisle	seat	8
+giggling	children	8
+jaw	bone	38
+whisk	meringue	3
+central	core	7
+simplicity	elegance	5
+conscious	sleep	2
+going	to	7
+calming	pool	2
+miracle	glorious	2
+canvas	jeans	3
+humidity	moist	10
+arachnid	legs	16
+fifteen	teen	6
+blanket	warm	52
+debunk	rumor	5
+willpower	overcome	2
+daunting	worried	3
+louisiana	crayfish	4
+obscene	pornographic	3
+blown	smoke	2
+fbi	cops	3
+facing	close	2
+bones	skeleton	64
+confuse	distract	3
+irony	misunderstood	2
+ears	hearing	23
+luck	fortune	22
+overview	contents	2
+brain	eyes	2
+clove	taste	2
+welcoming	mat	11
+minus	subtraction	6
+four	three	17
+petty	little	6
+retail	job	3
+compliant	obedient	16
+bumble	hair	2
+juvenile	jail	7
+bishop	pawn	5
+muff	warm	12
+facial	eyes	7
+read	mind	2
+affirm	declare	4
+yearning	longing	34
+poorly	little	3
+distinction	credit	2
+photographer	frame	2
+valued	cherished	9
+item	one	13
+orderly	hospital	19
+sulfur	steam	2
+dinner	plate	5
+jigsaw	mess	2
+futile	waste	5
+impish	naughty	8
+kidding	man	2
+frisbee	play	15
+barrel	wooden	6
+cap	limit	9
+beacon	leader	2
+perspiration	odor	3
+bunker	archie	6
+assortment	socks	2
+illness	sick	51
+puff	marshmallow	4
+rattle	death	2
+jet	leave	3
+categorize	words	3
+tax	break	2
+chains	necklace	3
+calcium	white	12
+natural	biological	2
+delightful	joy	5
+simply	hard	3
+drain	tub	8
+aerobics	dance	3
+suave	greasy	5
+lash	react	2
+printer	noise	2
+stressed	pain	3
+calcium	magnesium	2
+drive	lead	2
+demand	give	4
+detail	point	2
+belongings	suitcase	7
+practise	law	4
+controller	train	6
+self	awareness	2
+disrespect	discrimination	3
+alarm	warning	7
+reverend	sacred	3
+bio	animals	2
+respond	emergency	2
+undress	panties	2
+moniker	handle	3
+unbalanced	balance	2
+torn	apart	13
+unsympathetic	sad	5
+hellfire	christian	2
+celebration	fireworks	2
+resistance	france	4
+equator	globe	17
+washcloth	detergent	2
+summer	autumn	4
+upload	slow	2
+exception	ordinary	2
+sunset	rise	2
+insecure	shaky	3
+granola	flakes	2
+comrade	companion	3
+wombat	fat	2
+bid	try	2
+abduction	criminal	3
+pretentious	boring	3
+dogs	tails	3
+bolts	fasten	2
+egoistic	arrogant	9
+vengeance	murder	2
+sweatshirt	sweater	6
+mutton	wool	6
+mentally	cognitively	5
+offline	annoying	2
+alcoholism	bad	2
+muck	run	2
+indigestion	sour	2
+newspapers	obsolete	2
+tricycle	kids	9
+cavity	teeth	22
+persevere	stubborn	5
+grandchildren	food	2
+judaism	jesus	7
+realtor	mortgage	2
+ad	billboard	6
+mama	nurture	2
+worm	earthworm	3
+bridge	game	7
+computer	program	3
+fate	determined	2
+men	male	8
+revival	life	10
+extremity	nose	3
+wood	burn	2
+hygiene	neat	2
+shady	slim	15
+glistening	hair	2
+entirely	whole	44
+saying	anything	2
+partition	disk	2
+processor	blender	2
+size	medium	16
+diapers	stinky	3
+volcano	mountain	12
+starter	flag	2
+bendable	wire	2
+seize	take	35
+witches	black	8
+pew	sitting	2
+sector	public	14
+sneaking	creeping	8
+vulgar	rude	28
+tee	time	6
+sniff	sick	3
+zest	passion	2
+bolt	nuts	2
+tofu	vegan	9
+spatula	flipper	3
+intense	fast	2
+frown	scowl	2
+snap	finger	8
+power	wealth	3
+announcement	pregnancy	2
+endless	horizon	4
+phenomenon	strange	4
+george	lucas	2
+whipped	horse	6
+seasoning	stuffing	2
+closer	here	2
+decimate	tenth	6
+waitress	smile	2
+mast	sail	41
+commission	group	2
+people	lots	2
+postpone	time	2
+launch	throw	4
+murmur	rumor	3
+hormone	menopause	2
+denim	blue	48
+sell	barter	4
+innate	intrinsic	4
+prop	acting	4
+breadth	vast	2
+gritty	bitty	4
+fuzzy	soft	20
+buyer	person	3
+astonish	surprise	60
+migration	flight	3
+breastfeeding	pump	2
+glutton	full	2
+reuse	refresh	2
+achieve	goals	3
+sans	without	63
+applaud	joy	2
+fattening	chicken	2
+usage	tool	2
+aching	hurting	7
+mislead	media	2
+cat	aloof	2
+loss	win	11
+crowded	streets	2
+classy	heels	2
+seldom	infrequently	8
+factual	dictionary	2
+swirl	vanilla	2
+wrap	food	9
+elves	fairies	10
+salad	crunch	2
+warrant	sheriff	3
+unclean	diseased	2
+annually	celebration	2
+bodies	anatomy	3
+silly	goofy	14
+joe	schmo	4
+nerd	awkward	4
+poland	pirogi	3
+detour	change	4
+tan	spray	2
+censorship	cut	2
+door	shut	7
+record	disk	4
+natives	born	2
+laughing	cow	4
+portable	table	2
+combustion	internal	6
+trumpet	voluntary	2
+bowels	constipation	2
+carefully	concern	2
+holder	keeper	6
+insinuate	indicate	2
+slow	drag	3
+recline	bed	2
+context	related	3
+goblet	wine	50
+compost	garbage	11
+reproduce	fuck	6
+clash	collision	3
+sex	partner	2
+flee	fly	9
+curfew	police	8
+railroad	locomotive	2
+school	learning	9
+erect	build	35
+marxist	red	13
+regal	royalty	6
+behaviour	temperament	2
+child	mother	7
+rifle	death	3
+vote	elect	13
+thyroid	hypo	2
+dried	towel	7
+dreamer	unfocused	2
+guild	hall	2
+foretell	forehead	2
+bat	small	2
+insinuate	nasty	2
+jug	head	4
+athletic	gym	3
+hiv	sick	4
+goop	dirt	2
+cans	jars	3
+apache	tomahawk	2
+nylon	stocking	12
+hoarding	dragon	3
+angst	agitated	2
+buried	underground	16
+foggy	san francisco	5
+gummy	chewing gum	2
+assassination	franz ferdinand	3
+white coat	hypertension	3
+whore	red light district	2
+q-tips	stick	2
+strokes	heart attack	2
+tepid	room temperature	2
+cell phone	communicate	3
+christmas	birth of jesus	2
+hourglass	egg timer	5
+discreet	down low	2
+ex-wife	love	2
+primary school	play	2
+break down	disassemble	3
+through	by means of	2
+japan	aime	2
+detour	longer way	2
+entrepreneur	self-employed	2
+cash register	robbery	2
+fairy tales	happiness	2
+figure out	conclude	2
+cathedral	notre dame	3
+breaker	cb radio	3
+body parts	eyes	2
+magnifying glass	spyglass	2
+piglet	small pig	3
+first class	luxury	4
+trench	world war i	4
+baking soda	odor	2
+vegan	no meat	5
+light up	fireworks	2
+ambiguous	flip flop	2
+middle ages	kings	5
+resume	pick up	3
+parking ticket	angry	2
+light bulb	electricity	15
+science fiction	story	6
+invent	light bulb	7
+to be	are	6
+submissive	bdrm	2
+reddit	tumblr	2
+dark blue	navy	42
+fbi	federal bureau of investigation	2
+millionaire	slum dog	2
+debut	coming out	3
+coca cola	soda	35
+come back	retort	5
+durable	long lasting	10
+stock market	invest	3
+coca cola	always	2
+facial hair	eyebrow	7
+hold back	tide	2
+wash away	remove	10
+wait	for me	2
+body part	leg	43
+splice	ice cream	2
+euro	european union	3
+prostitute	oldest profession	3
+britain	queen elizabeth	2
+take off	airport	4
+buttercup	princess bride	2
+corn-beef	roast	2
+outlaw	jesse james	5
+extinct	ice age	2
+traffic jam	waiting	4
+optimism	bright side	2
+message	voicemail	3
+petrified	harry potter	6
+game show	prizes	9
+keep up	struggle	2
+magnifying glass	ants	13
+snake	in the grass	2
+alas	oh no	2
+leek	green onion	3
+nostalgia	good old days	2
+obsolete	not useful	2
+dyslexia	learning disability	2
+carry out	hold	2
+fictional	make believe	2
+have to	try	3
+palm tree	tall	2
+outdoors	fresh air	5
+not enough	poor	7
+stuck up	snob	17
+cut off	shorts	8
+break up	pain	7
+trashed	threw away	4
+duck	webbed feet	2
+get ready	race	8
+camp	girl scout	3
+middle east	terrorism	3
+not nice	disgusting	2
+wind instrument	chime	2
+recent	just happened	3
+superman	red and blue	2
+baton	baton rouge	2
+wild west	ranch	2
+mister	ma'am	3
+black sheep	loner	3
+prime minister	state	2
+hula hoop	girl	4
+genius	intelligence quotient	2
+wild west	cowboys	18
+mafia	good fellas	2
+jell-o	artificial	2
+old person	granny	3
+personnel	human resource	2
+magnifying glass	bigger	7
+camel	middle east	2
+tops	t-shirts	2
+blue jay	feathers	2
+lift	pick up	7
+cheers	tv show	7
+unravel	come apart	2
+snakes	rattlers	2
+operating system	programming	2
+terrorist	al aida	2
+easy	piece of cake	2
+suck up	liquid	2
+pentecostal	speaking in tongues	4
+excessive	a lot	4
+manage	in charge	3
+not enough	wanting	2
+conceit	self love	2
+leaving	going away	5
+examination	check up	2
+hooves	clip clop	2
+daylight	savings time	3
+pond	lily pads	2
+convey	pass along	2
+old person	senior	13
+constellation	big dipper	4
+nervous system	control	4
+christmas tree	candles	2
+blink	182	5
+tresspass	danger	2
+belly button	child	4
+clue	board game	7
+citizenship	belonging to a country	2
+black magic	magician	3
+clean	not dirty	2
+charisma	bill clinton	2
+spaceship	star wars	5
+tumblr	fig	3
+cream cheese	frosting	6
+knob	door handle	2
+tour	de force	6
+venture	go out	3
+flight attendant	man	2
+par	sub par	3
+toilet paper	poop	10
+adieu	au revoir	3
+tinfoil	reynolds	2
+lay down	prone	2
+scratchy	poison ivy	2
+together	with one another	2
+well mannered	neat	2
+pluto	solar system	3
+ouch	boo boo	4
+precise	to the point	2
+fairy tale	cinderella	11
+not allowed	stopped	2
+see through	crystal	3
+rid	get rid of	3
+fundamentalist	narrow minded	2
+pokemon	animal	2
+gravy	mashed potatoes	8
+cymbals	marching band	2
+transmit	pass on	3
+game show	audience	3
+ton	2000 pounds	3
+nervous system	sympathetic	2
+carbon dioxide	co2	5
+insure	keep safe	2
+manufacture	assembly line	2
+well mannered	child	2
+dark brown	paint	4
+contra	video game	2
+t-shirt	sleeves	2
+spell	spelling bee	2
+lawn mower	noisy	5
+soft	downey	2
+candy bar	mars	3
+hold back	restrict	2
+dolls	dress up	2
+hello	what's up	2
+apple juice	gold	2
+get better	wellness	4
+lego	creative	2
+sore throat	sick	20
+axis	world war ii	5
+meteor	shooting star	5
+space shuttle	star	2
+best friend	childhood	5
+pedantic	grammar nazi	2
+tear down	pieces	2
+pass out	unconscious	17
+candy bar	caramel	4
+operating system	dos	12
+unlike	not like	5
+infestation	taken over	2
+peas	green beans	2
+pick up	lines	2
+knees and toes	and	2
+reserved	on hold	2
+rang	missed call	3
+tribute	hunger games	15
+investigate	magnifying glass	7
+state of mind	thought	2
+old person	smell	2
+well	wishing well	2
+cod	new england	2
+black and white	simple	6
+inverse	upside down	6
+template	word document	2
+no one	emptiness	2
+wrapping paper	fun	2
+fish	dhoti	2
+not often	soon	2
+nutty	nuttella	2
+burgundy	dark red	2
+thrilling	michael jackson	4
+fishing pole	outdoors	2
+good news	gospel	9
+joining	put together	2
+rocking chair	relaxing	2
+tights	robin hood	3
+hamburgers	ground beef	3
+renew	start again	2
+grown up	boring	2
+road trip	vacation	10
+capable	can-do	2
+not me	nobody	3
+video game	color	2
+middle ages	knight	6
+fault	san andreas	2
+clueless	no idea	5
+star trek	movies	2
+firework	new year's eve	3
+freckle	sun-kissed	4
+cut off	disassociate	2
+solar system	beautiful	2
+do well	at	2
+rodents	guinea pig	2
+air force	uniform	6
+steroids	lance armstrong	3
+deviation	different way	2
+new york	skyscraper	7
+fairy tale	ending	2
+examine	magnifying glass	4
+toilet paper	feces	2
+hurting	in pain	3
+vitamin	b12	2
+black cat	unlucky	17
+app	for that	3
+tropic	palm tree	7
+dante	writer	5
+meaty	ground beef	2
+caregiver	loved one	2
+stairway	to heaven	9
+spontaneous	spur of the moment	2
+abundance	a lot	5
+operating system	code	3
+glue	elmer's	9
+handyman	jack of all trades	4
+lemon	vitamin c	3
+peanut	charlie brown	2
+crowbar	half-life	2
+lacquer	nail varnish	3
+dress up	woman	2
+native american	tribe	3
+pick up	clean	4
+victor	hunger games	3
+liqueur	sweet alcohol	2
+antibiotics	immune system	2
+coerce	peer pressure	2
+paisley	old fashioned	2
+ashes	to ashes	5
+sewing machine	needle	24
+murderer	jack the ripper	2
+table	put aside	2
+check out	supermarket	7
+distrust	uniroyal	2
+church service	quiet	3
+organized	put together	2
+not sure	wavering	3
+crumbly	falling apart	2
+persuasive	con man	2
+frame	of mind	3
+swedish	nordinc	4
+jell-o	spoon	2
+debunk	show up	2
+adorn	dress up	3
+man-made	house	2
+o	oh my	2
+builder	construction worker	4
+facebook	social media	3
+wisdom	old age	3
+north pole	winter	2
+turn on	engage	4
+put off	disgusted	7
+good news	everybody	2
+simple	as pie	2
+distant	far away	7
+magnifying glass	glass	3
+mussolini	trains	5
+santa claus	jolly	8
+ow	band-aid	3
+wind instrument	windmill	3
+plastic surgery	ugly	3
+in charge	boss	66
+forceful	star wars	2
+solar system	astronomy	3
+come in	home	8
+role model	ideal	5
+contraption	rube goldberg	6
+in time	pronto	2
+arabic	middel eastern	2
+statue	mount rushmore	2
+superman	clark kent	21
+short	not tall	2
+michael jackson	entertainer	3
+belly button	fuzz	3
+showy	show off	5
+south africa	hot	7
+programmer	computer science	2
+six pack	muscle	7
+probably	sort of	2
+marx	social theory	2
+presume	take for granted	2
+condescending	look down	5
+train	of thought	3
+backward	turned around	3
+bravado	false bravery	2
+strengthen	shore up	2
+rich	richy	2
+arousal	wake up	3
+phantom	phantom of the opera	2
+artist	van gogh	2
+extremely	too much	2
+opera	fat lady	5
+aviation	howard hughes	2
+mince	meat pie	3
+third world	problems	2
+cream cheese	soft	6
+coca cola	drink	27
+witchcraft	locus locus	3
+rosebud	welles	2
+wane	get smaller	2
+wall street	business	7
+pages	equerries	2
+carnage	spider-man	2
+sublime	santeria	2
+skyline	high-rise	3
+reputation	known for	3
+crappy	not good	3
+robot	will smith	2
+throw up	chunky	2
+sneaker	michael jordan	2
+blow up	pop	2
+manipulate	take advantage	2
+burrow	water ship	2
+maple syrup	snow	2
+credit card	bill	2
+attend	show up	2
+right	opposite of left	2
+penguin	happy feet	2
+twelve	days of christmas	8
+popsicle	ice block	3
+levels	video game	4
+sheltered	lean-to	2
+hot dog	frank	4
+keep going	motivation	6
+twenty	dollar bill	2
+breast feeding	food	3
+work out	muscles	5
+new zealand	islands	2
+none	not any	4
+put on	fool	2
+credit card	bank	11
+not yet	stop	2
+outer space	galaxy	16
+south pole	desolate	3
+wings	chicken wings	2
+carry on	continue	30
+hairdryer	hair salon	2
+drumstick	ice cream	17
+paper towel	wipe	14
+amen	so be it	2
+maple syrup	canada	38
+put down	pet	2
+marx	karl	37
+for sale	shoes	2
+no money	squint	11
+air force	one	8
+family tree	love	5
+baking soda	scones	3
+hiding	hide-and-seek	2
+presence	being there	2
+take part	help	5
+flight attendant	girl	2
+impolite	no manners	2
+hand	and foot	2
+sophistication	upper-class	2
+plank	pirate ship	3
+thinking	rodin	4
+advil	pain relief	2
+portal	video game	7
+no one	nobody	40
+overdone	over cooked	4
+compelled	made to	3
+tear down	paper	3
+apple juice	autumn	2
+tresspass	boundary	2
+chronic	long term	2
+workers	blue-collar	3
+puritan	cromwell	3
+cultured	well-read	2
+sleeping pill	awake	3
+sickle	grim reaper	2
+elves	little people	3
+air conditioning	cooling	3
+bad mood	foul	4
+uk	great britain	4
+ding dong	ding	2
+salad dressing	fattening	2
+fired	pink slip	4
+winner	first place	2
+bad weather	miserable	2
+soviet	space station	2
+flamboyant	elton john	2
+promotion	hard work	3
+maize	native american	3
+sharpie	felt tip	2
+dark brown	black	6
+for sure	correct	2
+machine gun	soldier	8
+piranha	finding nemo	2
+lobster	new england	2
+brave	new world	2
+penetrate	break through	2
+boarding school	tuition	2
+minus	take away	10
+jack	flat tire	2
+knees and toes	leg	5
+put off	upset	3
+swimming pool	drowning	2
+super bowl	ads	4
+linux	linus	2
+see through	clear	28
+turn on	television	3
+carbon dioxide	carbon	2
+clause	fine print	2
+competence	know how	2
+upper class	wealth	8
+best friend	caring	2
+go bad	rot	33
+parenthood	tv show	2
+construct	lego	3
+six pack	workout	5
+give in	accept	2
+winner	chicken dinner	3
+too many	drinks	2
+phantom	rolls royce	2
+birth control	abortion	5
+monitor	computer screen	2
+excitement	roller coaster	4
+recess	free time	2
+shining	jack nicholson	4
+neutral	no charge	2
+real estate	broker	5
+freshman	first-year	2
+not sharp	sharp	3
+rhapsody	in blue	10
+hummus	chick peas	3
+down under	outback	4
+go off	rant	4
+bandit	robin hood	3
+take over	steal	3
+fbi	united states	2
+frozen	ice cream	13
+salad dressing	caesar	11
+grizzly	old man	2
+nintendo	video game	5
+helicopter	felipa	3
+carriage	18th century	2
+crystal ball	see	2
+tea party	politics	10
+not often	once	2
+martial art	chinese	2
+surfer	long hair	2
+weatherman	weather girl	2
+polo	ralph lauren	2
+teddy bear	hug	3
+blow up	burst	2
+bambi	legs	2
+tolerate	put up with	13
+mostly	almost all	3
+corn-beef	yum	2
+bisexual	men and women	2
+sufficient	good enough	3
+body parts	crime	2
+obsessive	single-minded	2
+to do	make	5
+thorn	sleeping beauty	2
+air conditioning	fresh	3
+mobile phone	available	2
+joe	my nephew	2
+bagel	new york	5
+payday	pay bills	2
+armed forces	tank	4
+mental health	medication	2
+leave out	bully	5
+good job	finish	2
+peppy	le pee	2
+stingray	steve irwin	10
+ice hockey	goal	4
+wand	fairy godmother	2
+bad mood	anger	5
+reflect	look back	2
+boarding school	private	2
+law enforcement	law	5
+brotherhood	of man	4
+apologize	say sorry	2
+realist	truth seeker	2
+reprimand	tell off	9
+elementary school	pupil	3
+greenhouse effect	environment	13
+mean	standard deviation	2
+credit card	atm	3
+smoothly	without problems	2
+lizard	cold blooded	3
+life jacket	useful	2
+best friend	good	2
+e-mail	convenience	2
+ecstatic	over the moon	5
+put on	show	5
+port	usb	3
+far away	castle	2
+toilet paper	poo	3
+frame	set-up	2
+mcdonald's	french fries	4
+noticeable	see-able	2
+count on	rely	29
+light bulb	bright	31
+adequate	just right	2
+hot tub	bubble	4
+rain forest	ecosystem	2
+plumber	butt-crack	2
+wi-fi	network	7
+tad	a little	3
+grade	report card	2
+dynasty	television show	2
+hazy	shade of winter	2
+diarrhea	immodium	2
+hoarder	pack-rat	3
+amok	out of control	5
+maple syrup	sweet	43
+scarlet	johansen	4
+south america	peru	11
+seat belt	safe	7
+odd	man out	2
+cunt	douche bag	2
+next to	position	2
+pilgrim	squanto	2
+bump	speed bump	2
+canoe	boy scouts	2
+sew	a needle pulling thread	2
+storm	x-men	3
+corned beef	cooking	2
+milky way	constellation	4
+karaoke	off-key	2
+nunnery	get thee to a	2
+hip hop	dancing	3
+primary school	young	8
+boarding school	teacher	3
+liberal	open-minded	2
+long hair	shining	2
+martial art	swords	2
+theme park	vacation	2
+lego	childhood	3
+heron	long legs	2
+sparse	not many	2
+swag	curtain style	2
+landmark	statue of liberty	4
+surrender	white flag	14
+heifer	fat woman	2
+hip hop	male	2
+deceased	passed away	3
+go down	ladder	2
+effect	bring about	2
+have to	want	3
+rely	count on	9
+sprite	soft drink	2
+skittish	on edge	2
+united kingdom	england	39
+unacceptable	not good	2
+down under	koala	2
+let down	drop	6
+apple juice	children	3
+orange juice	milk	2
+wild west	cactus	4
+damsel	in distress	7
+global warming	weather	11
+david bowie	heroes	3
+star wars	movies	2
+corps	de ballet	3
+parlor	front room	5
+black magic	occult	4
+thorn	in my side	3
+important	right away	2
+beans	on toast	2
+bank account	number	3
+upside down	confused	3
+guiding	girl guides	2
+hot dogs	food	12
+banned	not allowed	11
+david bowie	old	2
+radical	right-wing	2
+get better	ill	11
+hard work	lazy	3
+hold back	withhold	9
+sunglasses	ray bans	2
+in spite of	you	2
+perseverance	keeping on	2
+incognito	google chrome	2
+tear down	pull	2
+down under	home	2
+empathize	feel for	2
+old people	retirement	4
+air conditioning	office	2
+get rid of	eliminate	9
+palm trees	paradise	2
+white house	michelle	2
+wi-fi	wireless	21
+steering wheel	go	2
+hypnotize	mind control	2
+untrue	not true	2
+take away	learn	4
+shakespeare	romeo and juliet	10
+long hair	brush	5
+sprinkle	watering can	3
+cheesecake	cheesecake factory	2
+set up	arrangement	2
+drone	star wars	13
+steep	learning curve	2
+bleeding	band-aid	2
+move on	grief	2
+graduation	high school	12
+fuel	gas station	2
+excuse me	bump	6
+united kingdom	queen	22
+video game	nintendo	7
+haunt	hang around	2
+palm trees	desert	10
+burned	singed	4
+indication	point to	2
+fluorescent	light bulb	12
+occasional	not often	5
+traffic jam	horn	3
+endless	never ending	6
+next to	location	2
+look at	spectacle	2
+oldfashioned	boring	3
+choking	heimlich maneuver	2
+tea party	extreme	2
+cornflakes	frosted flakes	2
+political party	elephant	3
+city	new york	10
+do not	hesitate	2
+withhold	keep back	3
+monopoly	big company	2
+atoms	orbitals	2
+put together	arrange	2
+horsefly	shoefly	2
+customs	conveyor belt	2
+discard	give up	2
+ribs	human body	2
+wipe out	accident	3
+mobile phone	screen	2
+bambi	mom	5
+licorice	all sorts	7
+high school	sports	6
+bless you	flu	2
+hula hoop	ring	13
+cooked	not raw	4
+pricey	over-priced	2
+disloyal	two faced	3
+frying pan	wok	2
+give away	offer	2
+democrat	open-minded	2
+tempt	adam and eve	2
+retreat	back-up	3
+peanut butter	sandwich	34
+tin foil	turkey	5
+x	marks the spot	11
+physiotherapist	occupational therapist	2
+not enough	need	4
+hold on	fall	2
+not allowed	illegal	9
+part of	body	2
+go away	scoot	2
+wi-fi	radio	3
+indigestion	tums	7
+jell-o	sandwich	3
+dementia	old age	7
+state of mind	being	2
+los angeles	traffic	6
+put off	delayed	3
+cash register	bill	2
+piggy	moppets	2
+access	get in	2
+slogan	war-cry	2
+protestant	non-catholic	2
+jolly	santa claus	5
+among	inbetween	2
+full stop	finish	5
+science fiction	ship	3
+surprising	open mouthed	2
+no one	alone	38
+fetch	dog play	2
+hold on	horses	2
+retro	bell bottoms	2
+tuck	fold under	2
+obliged	have to	7
+wake up	light	2
+tofu	stir-fry	3
+mario	jump	2
+common sense	incense	2
+accomplished	well done	2
+cod	liver oil	4
+plank	walk the plank	2
+down under	song	2
+cruelty	to animals	3
+grown-ups	adults	58
+magnifying glass	reading	6
+snapshot	point in time	2
+haughty	stuck up	7
+show up	there	3
+hokey	cokey	3
+ward	stave off	2
+ballerina	ballet shoes	2
+hardworking	working class	2
+lobotomy	phineas gage	2
+marshmallow	ghostbusters	2
+fine	all right	2
+purge	get rid of	8
+old lady	small	3
+cut off	money	6
+dive	swimming pool	2
+uninterested	not bothered	2
+top	t-shirt	2
+sugar cane	crop	5
+mr	magoo	2
+no money	student	2
+cash register	supermarket	4
+offspring	next generation	2
+homophobic	old fashioned	2
+lad	young man	2
+cyborg	sci-fi	8
+deviation	not normal	4
+duct tape	sticky	35
+primary school	playing	2
+psychosis	mental health	2
+baggy	t-shirt	4
+pokemon	cartoon	15
+pirates	corsairs	2
+seamstress	sewing machine	4
+real	not fake	5
+as well	might	3
+ice cream	sundae	7
+beyoncé	diva	5
+face	look at	3
+aliens	marians	7
+sore throat	smoking	2
+punk	safety pin	4
+cell phone	phone	11
+resistant	push back	2
+lay down	hide	2
+mark	get set	3
+look up	down	3
+see through	invisible	10
+listless	no energy	2
+teenage	high school	5
+used	second-hand	5
+kick out	bouncer	3
+cubes	lego	2
+excuse me	yes	3
+science fiction	reading	2
+anorexia	eating disorder	3
+bass	low voice	2
+black and white	simplistic	2
+restricted	not allowed	4
+old man	lonely	2
+have to	necessity	2
+temporary	for now	2
+punish	death penalty	2
+cache	hiding place	2
+eyeball	look at	2
+white coat	dentist	6
+sing	a song	2
+stalin	gulag	3
+blood pressure	stress	7
+credit card	shop	2
+meth	bad teeth	3
+common sense	smarts	2
+particular	certain one	2
+armed forces	helmet	2
+crossbow	robin hood	4
+unfriendly	stand-offish	2
+minuscule	itsy-bitsy	2
+french toast	delicious	3
+millennium	year 2000	3
+flip flops	ugly	2
+par	for the course	6
+come in	hospitality	2
+blue collar	tough	2
+musical instrument	horn	2
+number	how many	3
+well mannered	behavior	2
+furry	stuffed animal	2
+recorder	musical instrument	2
+new zealand	sheep	8
+constant	all the time	2
+wrinkle	in time	6
+clan	ku	2
+give in	agree	2
+person	human being	2
+young adult	girl	4
+boarding school	england	9
+pancake	maple syrup	3
+civil war	north	7
+unlucky	bad luck	3
+logo	word mark	2
+carbon dioxide	exhale	2
+impede	slow down	5
+provide	take care of	2
+fishing pole	boat	5
+superstition	black cat	14
+desperation	stephen king	2
+bubblegum	hubba bubba	2
+burrow	beasley	3
+global warming	inconvenient	2
+question mark	unknown	2
+cuff	cuff links	4
+go-cart	toy	3
+review	look at	2
+leggings	robin hood	2
+extraterrestrial	outer space	11
+apprentice	men tee	2
+pound	16 ounces	4
+abstain	self-control	2
+pass out	heat	2
+billion	a lot	3
+tresspass	sign	8
+grown-ups	serious	4
+intriguing	thought provoking	2
+labrador	retrier	2
+fairy tale	witch	2
+lymph	lymph node	3
+tresspass	forgive	3
+hitchhiker	road trip	2
+see through	veil	3
+comprehend	get it	3
+blood pressure	pills	2
+overalls	work clothes	2
+dark blue	jeans	6
+hot dogs	ballpark	2
+execution	firing squad	2
+role model	leader	2
+t-shirt	summer	17
+not enough	sparse	4
+tea party	harbor	2
+paper towel	wet	8
+leader	in charge	9
+common sense	intelligence	4
+piss off	go	5
+phone	e.t.	2
+transplant	non-native	2
+pubic hair	pubes	6
+figure out	calculate	3
+ikea	flat-pack	3
+newspaper	new york times	2
+give in	allow	2
+mario	male	2
+theology	study of religion	3
+get up	now	2
+rebuild	start over	5
+carbon dioxide	breath	5
+vibrate	sex toy	2
+wi-fi	face	7
+goosebumps	fright	3
+how	to do	2
+spoil	go bad	2
+cranny	english muffin	4
+burglary	break-in	7
+trashed	messed up	2
+dressy	dressed-up	2
+olive oil	greece	7
+climate change	sea level	3
+bad luck	black cat	6
+fairy tale	grimm	11
+make believe	dress up	2
+bambi	lawrencium bembeneck	3
+old lady	white hair	4
+get ready	come on	2
+junk food	cheeto	4
+global warming	polar bears	3
+robin hood	merry men	10
+wipe out	game show	2
+kung fu	martial arts	21
+chocolate bar	hershey's	6
+keep going	don't stop	2
+get ready	get set	16
+dante	alighieri	7
+social security	old age	3
+third world	first world	4
+carry on	go ahead	3
+united kingdom	brittain	3
+take out	drive through	2
+go on	keep talking	2
+speed up	go faster	4
+get ready	get up	2
+line up	mugshot	2
+rhode island	east coast	4
+chinese food	soy sauce	6
+star wars	light sabre	3
+pick up	hook up	2
+get up	get down	6
+doctor who	sci-fi	4
+bad luck	try again	2
+frying pan	cast iron	7
+lawn mower	hay fever	2
+tresspass	lord's prayer	3
+black out	pass out	12
+full moon	new moon	2
+oldfashioned	out of date	3
+james bond	connery	2
+go bad	breaking bad	2
+white powder	baby powder	6
+bad guy	black hat	5
+q-tips	cotton wool	2
+stalin	josef	5
+star trek	tv show	2
+to be	or not to be	32
+kick out	lash out	2
+new england	united kingdom	4
+head and shoulders	knees and toes	16
+show up	be there	5
+star wars	science fiction	6
+magnifying glass	zoom in	2
+stuck-up	self-absorbed	2
+go ahead	after you	4
+suck up	brown-nose	2
+blue collar	middle class	3
+frying pan	stir-fry	2
+head and shoulders	eyes and ears	2
+michael jackson	beat it	2
+record player	old fashioned	2
+james bond	daniel craig	6
+move on	carry on	6
+apple juice	orange juice	10
+common sense	street smart	4
+pass out	knock out	2
+james bond	sky fall	2
+traffic jam	rush hour	5
+keep up	fall behind	3
+fairy tale	hans christian anderson	3
+next to	close to	4
+put off	set aside	2
+goosebumps	goosepimples	2
+white house	united states	3
+blue collar	working class	5
+guinea pig	test subject	11
+los angeles	big city	3
+good job	thumbs up	4
+north pole	rudolph	2
+carbon dioxide	greenhouse effect	3
+hay fever	red eyes	2
+kung fu	tai chi	3
+snow white	black hair	2
+black hole	outer space	3
+amino acid	building blocks	7
+great britain	british isles	3
+band-aid	boo-boo	4
+walking stick	old man	4
+heart attack	myocardial infarction	2
+blue collar	white collar	5
+movie star	paparazzi	2
+black and white	michael jackson	5
+living room	sitting room	2
+throw away	user name	2
+game boy	computer game	2
+teddy bear	bow tie	2
+star trek	dr spock	3
+mario	italian name	3
+stand up	get up	8
+climate change	global warming	19
+look at	pay attention to	2
+tumblr	social media	8
+far away	close by	2
+martial art	tai chi	2
+star wars	death star	3
+tea party	afternoon tea	2
+sleeping pill	xanadu	2
+state of mind	new york	7
+go away	begone	2
+tea party	old-fashioned	2
+outer space	space travel	2
+carbon dioxide	carbon monoxide	5
+old people	nursing homes	2
+light year	space travel	3
+christmas tree	santa claus	4
+star trek	star wars	8
+air force	top gun	2
+in spite of	even though	5
+south america	world cup	2
+move on	get over it	6
+fairy tales	made up	2
+dress up	ball gown	2
+fast food	flash fry	2
+go off	blow up	4
+hong kong	king kong	4
+let go	move on	7
+role model	look up to	7
+knees and toes	knees and toes	4
+christmas tree	tannenbaum	4
+santa claus	red and white	2
+soft drink	root beer	2
+put together	flat pack	2
+to be	or not	2
+mario	luigi	30
+boarding school	harry potter	2
+harry potter	magic wand	2
+move on	forget about it	2
+stalin	world war ii	3
+super bowl	american football	4
+in time	in due course	2
+for sale	caveat emptor	2
+go down	to the river	2
+light bulb	thomas edison	6
+exclamation point	full stop	2
+too many	a lot	16
+martial art	kraal mags	2
+south pole	santa claus	2
+living room	dining room	7
+junk food	mcdonald’s	5
+work out	figure out	2
+top hat	mad hatter	2
+grown-ups	big people	2
+robin hood	sherwood forest	7
+real estate	estate agent	3
+star wars	sky walker	2
+space shuttle	outer space	3
+washing machine	washing powder	2
+chinese food	chow man	2
+parking ticket	traffic warden	3
+rhode island	new york	14
+not sure	not known	2
+air conditioning	climate change	2
+new england	new hampshire	4
+science fiction	star trek	9
+mussolini	world war ii	5
+video game	pacman	6
+prime minister	trudeau	3
+ice hockey	ice skating	2
+carry out	take away	5
+tin foil	aluminium foil	7
+santa claus	north pole	11
+baking soda	baking powder	9
+hot chocolate	whipped cream	3
+star wars	george lucas	6
+soft drink	non-alcoholic	3
+heart attack	left arm	3
+in touch	in contact	2
+chocolate bar	cadbury	4
+red hair	ed sheeran	2
+grown-ups	peter pan	2
+get rid of	dispose of	2
+star wars	star trek	4
+los angeles	west coast	3
+suck up	teacher's pet	3
+apple pie	cherry pie	2
+post office	post box	2
+old people	young people	3
+put together	well-dressed	2
+good job	nice work	2
+have to	no choice	4
+full stop	stop sign	7
+plastic surgery	nose job	5
+get ready	to go	2
+look up	look down	3
+tresspass	private property	4
+yo-yo	up and down	4
+white house	barack obama	2
+in fact	as a matter of fact	2
+go off	get mad	2
+living room	front room	2
+piss off	go away	14
+take away	carry out	3
+hip hop	boom box	2
+robin hood	maid marian	5
+roast beef	medium rare	2
+hold back	keep quiet	2
+a few	a couple	14
+not allowed	ruled out	2
+so so	oh well	2
+game boy	super mario	2
+question mark	?	2
+amino acid	building block	4
+go on	keep going	2
+turn away	u-turn	2
+first class	second class	2
+new orleans	french quarter	6
+pokemon	team rocket	2
+french fries	hot dog	2
+get ready	set, go	2
+slow down	take it easy	2
+south pole	polar bear	4
+plastic surgery	boob job	4
+west coast	east coast	11
+red light	traffic light	2
+solar system	milky way	7
+game boy	mario	3
+dress up	special occasion	2
+get ready	get dressed	2
+west coast	best coast	3
+brown sugar	white sugar	5
+david bowie	star man	6
+board game	ticket to ride	2
+go ahead	make my day	7
+piss off	fuck off	11
+put down	lay down	4
+light up	christmas tree	2
+not sharp	not bright	2
+harry potter	and the deathly hallows	2
+corned beef	old fashioned	2
+road trip	cross country	4
+t-shirt	tie dye	2
+too many	in excess	2
+santa claus	red suit	2
+santa claus	coca cola	2
+chocolate bar	milk chocolate	2
+board game	game night	2
+break down	take apart	3
+upper class	upper crust	3
+beyoncé	pop star	4
+not yet	in a bit	2
+elementary school	primary school	9
+go after	hunt down	2
+top hat	bow tie	2
+shut up	be quiet	19
+black hole	space-time	2
+global warming	ozone layer	2
+movie star	red carpet	3
+native american	red indian	2
+soft drink	coca cola	3
+los angeles	city of angels	2
+carry on	wayward son	3
+game boy	pokemon	2
+good job	good dog	2
+too much	too many	2
+native americans	first nations	6
+lord of the rings	new zealand	3
+boy scout	girl scout	9
+science fiction	star wars	9
+doctor who	tv show	5
+life jacket	life saver	3
+dining room	dining table	3
+snow white	grimm	2
+tea party	alice in wonderland	4
+doctor who	phone booth	5
+roast beef	yorkshire pudding	8
+trench coat	world war i	2
+black out	no light	4
+fairy tales	make believe	3
+south pole	polar bears	2
+a lot	a ton	2
+kung fu	jackie chan	3
+q-tips	cotton buds	4
+pokemon	tv show	2
+black cat	green eyes	2
+in touch	out of touch	3
+nervous system	spinal cord	3
+black hole	super massive	3
+greenhouse effect	climate change	7
+part of	your world	2
+james bond	secret service	2
+not enough	need more	3
+get rid of	throw away	19
+state of mind	mental health	2
+go ahead	your turn	2
+not sure	on the fence	2
+give away	give up	2
+greenhouse effect	global warming	24
+long hair	metal head	2
+black magic	wikka	2
+climate change	carbon dioxide	4
+of course	for sure	2
