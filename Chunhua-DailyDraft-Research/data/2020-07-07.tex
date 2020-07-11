@@ -1,0 +1,116 @@
+\chapter{2020-07-07}
+
+\textbf{Check list for data creation}
+\begin{enumerate}
+    \item Sampling order 
+    \item Ensure the nodes and triples num to be close 
+    \item Output degree of the test and valid graph 
+    \item Output the entity frequency on sampled graph, SWOW and ConceptNet
+    \item If h and t hold n relations, add all the relations to SWOW
+    \item Ensure the content of the final written triples is consistent with the orginal one
+\end{enumerate}
+
+\section{Dataset Creation}
+\subsection{Statistics of Dataset}
+\begin{table}
+\centering
+    \begin{tabular}{l|llllll}
+	\toprule
+	 Category & File name & Triples & Entities & Relations & avg.Degree & Density \\
+	\midrule
+	 CN-100K & cn\_100k\_train\_valid\_test & 102,400 & 78,334 & 34 & 1.275  &1.7e-5 \\
+     SWOW & swow\_freq2.filter & 413,481 & 34,829 & 1 &  11.871 & 3.4e-4 \\
+    \hline
+	 Overlap & overlap\_triples & 8,122 & 4,006 & 33 &  \\
+	 Overlap & overlap\_entities &  & 8,382 &  &  \\
+    \hline
+    Train & rel\_triples1 & 100,162 & 78,173 & 34 & 1.251 & 1.6e-5\\
+	Train & rel\_triples2 & 413,504 & 34,813 & 34 & 11.864 & 3.41e-4\\
+	Train & ent\_links\_train &  & 6,600 &  \\
+	Train & rel\_links &  &  & 33 & \\
+    \hline
+	Test & rel\_triples\_test & 1,125 & 889 & 27 & 1.165 & 1.42e-3 \\
+	Test & ent\_links\_test &  & 889 &  \\
+    \hline
+	Valid & rel\_triples\_valid & 1,110 & 893 & 29 & 1.159 & 1.39e-3\\
+	Valid & ent\_links\_valid &  & 893 &  \\
+	\bottomrule
+\end{tabular}
+\caption{\label{tab:dataset_statistics} Data Statistics for newly created dataset.}
+\end{table}
+
+
+node degree distribution of valid and test 
+learning curves on current model (current versionm, still need to debug)
+
+
+\subsection{Procedures of creating dataset}
+\clearpage
+\begin{algorithm}[H]
+    \SetAlgoLined
+    \LinesNumbered
+    \KwData{Triples from ConceptNet and SWOW}
+    \KwResult{Triples for train $\mathcal{T}_{tr}$, valid $\mathcal{T}_v$, test $\mathcal{T}_{te}$}
+    \KwResult{Overlap entities for train, valid, test alignment task}
+    \KwResult{Overlap relations for train, valid, test} 
+    Initilize overlap triples $\mathcal{T}_o= set()$  \\
+    Initilize overlap nodes $\mathcal{N}_{o} = set()$  \\
+    Build a directional CN-Graph $\mathcal{G}_c$ \\
+    Build a directional SW-Graph $\mathcal{G}_s$ \\
+    \For{$(h,t) \gets \mathcal{G}_s$} {
+        \If{$(h,t) \in \mathcal{G}_c $} {
+            \For{$r \gets \mathcal{G}_{c}(h,t)$}{ %\Comment*{Multiple relations may hold}
+                 $\mathcal{T}_o \gets (r, h, t)$ \\ 
+                 $\mathcal{N}_o \gets (h, t)$ \\
+                 $\mathcal{G}_s \gets (r, h, t) $
+            }
+        } 
+    }
+    Sample 3000 nodes from $\mathcal{N}_o$ and shuffle them \\
+    Split 3000 nodes into 2 sets, $\mathcal{N}_t, \mathcal{N}_v$ for sampling valid and test respectively \\
+    \For {$ (r, h, t) \in \mathcal{E}_o$}{
+        \If{$ (h,t) \in \mathcal{N}_t $}{
+            $\mathcal{N}_t \gets (r, h, t)$
+        }
+        \If{$ (h,t) \in \mathcal{N}_v $}{
+            $\mathcal{N}_v \gets (r, h, t)$
+        }
+    }
+
+    \caption{\label{algo:create_alignment_dataset} Procedures of creating aligned dataset}
+\end{algorithm}
+
+\textbf{Code Checklist}
+\begin{enumerate}
+    \item Data
+        \begin{enumerate}
+            \item \sout{Generate negative samples for test and valid triples}
+        \end{enumerate}
+    \item  Evaluation 
+        \begin{enumerate}
+            \item  Compare my code with the others's to see whether there is any different
+             \item  \faCheckSquareO Add filter rank code. \\ Purpose of filtered rank: For a given $(h,r)$ in the test set, we will compute the score with all the other entitities in the cadidate pool, e.g., $(h,r,t^{\prime})$, which could possibly be a true triple in the train, valid, test sets, and gets a higher score than the golden $t$, and lower the rank of $t$, which is unfair. So the way of removing  all the possible true triples from the corrupted triple list is called \textit{filtered rank}, and the other one is called \textit{raw rank}.  (see explinations from \cite{Bordes2013TransENIPS,Dettmers2018conve})
+            \item \faCheckSquareO Debug the code of restoring a trained model for re-testing relation classifier
+            \item  \faCheckSquareO Measure alignment in both directions 
+            \item Evaluate the dev and test with mini-batch
+        \end{enumerate}
+    \item  Training
+        \begin{enumerate}
+            \item \faCheckSquareO Set FLAG for training with maxinum epoch or early stoping 
+            \item \faCheckSquareO Use $0.5*(align\_hits1 + completion\_hits1)$ or $0.5*(align\_mrr + completion\_mrr)$ as the early stopping criteria 
+            \item \faCheckSquareO If early stopping, save the model with the best performance
+            \item If early stopping, restore and test the saved model with the best performance
+            \item If early stopping, visualize the curves of stopping criteria
+            \item Sort out code, make sure the alignment and completion code to be consistent
+            \item Add regularizatons for weight parameters in relation classifier
+        \end{enumerate}
+    \item  Model
+        \begin{enumerate}
+            \item Make use of both embeddings learnt from CN and SW when doing evaluation. 
+        \end{enumerate}
+\end{enumerate}
+
+
+%relation_classes can be removed and replace it with id_relations_dict
+
+

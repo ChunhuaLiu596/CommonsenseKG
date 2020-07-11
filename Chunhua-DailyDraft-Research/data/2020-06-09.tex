@@ -1,0 +1,44 @@
+\chapter{2020-06-09}
+
+\textbf{Checklist}
+\begin{todolist}
+    \item[\done] For valid sets:
+        \begin{enumerate}
+            \item Figure out why hits and mrr on valid set is much lower than test set. 
+            \item Visualize training curves on valid set. (still haven't figure out) 
+        \end{enumerate}
+    \item Add evaluation on link prediction ($p(t|h,r)$) and triple classification (p(h,r,t) whether a triple exists).
+    \item Add one more baseline: add the relation calssifier on TransE model and evaluate it. 
+    \item Analysis on $\beta_1$ and $\beta_2$: 
+    \begin{enumerate}
+        \item Zoom in current $\beta_1$ (0-0.1) and $\beta_2$ (0.1-0.2) to see how they influce the MRR and the  REL\_ACC 
+        \item Scale up the $\beta_1$ and $\beta_2$ to balance the scale range between $L_r$ and $L_p$ with $L_e$. (Because $L_e \approx 5*L_r$ and $L_e \approx 10*L_p$.) 
+        \item Draw the correlation between $\beta_1$ and $\beta_2$ with the evaluation matrics. Observe how $\beta_1$ and $\beta_2$ influence the MRR or REL\_ACC.
+    \end{enumerate}
+    \item[\done] Print the confusion matrix for relation types to observe how model performs on each type.
+    \item[\done] Apply dropout to model to tackle the overfitting problem of relaiton type accuracy.  
+\end{todolist}
+
+
+\clearpage
+\section{Meeting Notes}
+\begin{enumerate}
+    \item Make sure the baseline is all good. Compare the model with or without relation calssifier.
+    \item Relation classification is still overfitting.
+    %\begin{enumerate}[label*=\arabic*.]
+    \begin{enumerate}
+        \item \faCheckSquareO Try applying a dropout to the output of hidden layer, not only just the input of hidden layer.
+        \item \faCheckSquareO Try adding more hidden layers.
+        \item Try lowering the ratio of $\beta_1$ for relation cross entropy loss.  
+    \end{enumerate}
+    \item Figure out why completion results (hits@N, mrr, mr) are pretty bad, why it's much worse than alignment (why completion task is harder than alignemnt task).
+     \begin{enumerate}
+        \item \faCheckSquareO Check the code for evaluating on KG completion
+        \item \faCheckSquareO Use the overall loss for early stopping instead of only the hits1 on alignment
+    \end{enumerate}
+    \item Give a better explanation on why alignment results on test is still better than valid. (The candidates for valid is half less than the test, but the valid mrr is still lower than the test.)
+    \item \faCheckSquareO Make sure the test data is not used for training.
+    \item Draw the heatmap for $\beta_1$ and $\beta_2$ with rel\_acc and mrr.
+    \item Pre-train the relation-classifier and then freeze it to train other parts of models. 
+    \item Post my notes on slack before next monday night. (Thanks for Lea to remind me.)
+\end{enumerate}

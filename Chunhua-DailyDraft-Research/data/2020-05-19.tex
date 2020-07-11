@@ -1,0 +1,276 @@
+\chapter{2020-05-19}
+
+\begin{comment}
+
+\noindent \textbf{To do List}: 
+\begin{todolist}
+
+    \item List the difference of settings between our scenario and the ITransE \citep{Zhu2017IterativeEA}. 
+    \item Try to see whether ITransE can apply to the alignments of ConceptNet and SWOW 
+    \\(See does other people use their method in other bigger and sparser graph.)
+\end{todolist}
+
+
+\begin{todolist}
+\item list our difference 
+\item find out the baseline: fairly simple alignment methods, like for instance ITransE in its most vanilla version
+    \begin{todolist}
+    \item model architecture, losses
+    \item input files, codes 
+    \end{todolist}
+\end{todolist}
+
+
+TransE model, 
+does any work on ConceptNet has used it before?
+
+jointly train with alignment loss, iterative entity alignment
+
+
+\begin{itemize}
+    \item Project entities in two graph into one embeddings space, the training triples are 
+\end{itemize}
+
+\end{comment}
+
+\begin{todolist}
+\item[\done] set up openea environment
+\item[\done] run IPTransE on datasets provided by \cite{Sun2020ABS}
+\item[\done] read IPTransE code $\rightarrow$ convert to ITransE,
+
+    \begin{todolist}
+    \item[\done] delete \_generate\_path\_loss\
+    %\item[\done] two graph one node embedding matrix and one rel matrix $\rightarrow$ two graphs two node embedding matrices, and two rel embedding matrices.
+    \end{todolist}
+\item[\done] read code: input file format
+    \begin{todolist}
+    \item[\done] read\_relation\_triples(): h r t
+    \item[\done] aligned seed: test,train, valid=7:2:1
+    \end{todolist}
+\item[\done] prepare ConceptNet and SWOW aligned dataset 
+\item[\done] run ITransE on ConceptNet and SWOW
+\item read BootEA paper 
+\item compare BootEA and ITransE
+\item run BootEA or ITransE to see whether the results can match with the paper 
+\end{todolist}
+
+
+\section{Difference between Commonsense-cross-graphs and Others}
+
+The first obvious difference is other graph are densier with less entity number and more relation types. Also, both graphs connected with a set of relation types. SWOW doesn't contain specific relation edges.
+
+The second may be are nodes are non-canonicalized or free-form text, increasing the scale of graph. Also, may be this is why previous work used LSTM \citep{li-etal-2016-commonsense,Saito2018CommonsenseKB} instead of TransE to learn entity embeddings in commonsense knowledge graph.
+
+(notes: I will be keep thinking about what is the biggest challenge of commonsense knowledge graph completion is, except for the sparsity?)
+\begin{table}[htb]
+    \centering
+    \begin{tabular}{c|ccc}
+    \hline
+           dataset & \#Tiples &\#Ent  &\#Deg.  \\\hline
+          DBP15K-EN & 101,058  & 14,984 &  13.49  \\
+          DBP15K-FR & 93,016 & 14,991 & 12.41  \\
+          WK3L-EN & 95,096 & 8,351 & 22.77  \\
+          WK3L-FR & 68,787 & 7,180 & 19.16  \\
+          \hline
+          CN-100K & 100,000 & 78,088 & 1.25 \\
+          SWOW & 413,481 & 34,831 &  11.77\\\hline
+    \end{tabular}
+    \caption{Statistics for various KGs. Sources come from \cite{Sun2020ABS} and \cite{Malaviya2019ExploitingSA}.}
+    \label{tab:comparison-of-different-alignemnt-dataset}
+\end{table}
+
+\section{Experiments}
+\subsection{Baseline models}
+MTransE and ITransE are used as our baselines. 
+\begin{table}[!ht]
+    \begin{adjustbox}{max width=\textwidth}
+    \centering
+    \begin{tabular}{c|c|c|c}
+          Model &  Embedding-loss $S_e$ & Align-loss $S_a$  & Iterative-loss $S_i$\\\hline
+          MTransE &  $\sum\limits_{(h, r, t) \in T} E(h,r,t)$ & $\left\|\mathbf{M}^{e} \mathbf{e_1}-\mathbf{e_2}^{\prime}\right\|$  & 0 \\
+          ITransE & $\sum\limits_{\left(h^{\prime}, r^{\prime}, t^{\prime}\right) \in T^{-}}\left[\gamma+E(h, r, t)-E\left(h^{\prime}, r^{\prime}, t^{\prime}\right)\right]_{+}$  & 0 & $\sum\limits_{\left(e_{1}, e_{2}\right) \in \mathbb{M}} R\left(e_{1}, e_{2}\right)\left(\mathcal{H}_{\left(e_{1}, e_{2}\right)}+\mathcal{H}_{\left(e_{2}, e_{1}\right)}\right)$ \\\hline
+    \end{tabular}
+    \end{adjustbox}
+    \caption{Model losses, where $R\left(e_{1}, e_{2}\right)$ is a reliability score indicating how confident $e_1$ can be aligned to $e_2$.}
+    \label{tab:model-losses}
+\end{table}
+
+\begin{align}
+    & E(h, r, t)=\|\mathbf{h}+\mathbf{r}-\mathbf{t}\| \\
+    & \mathcal{H}_{\left(e_{1}, e_{2}\right)}=\sum_{\left(e_{1}, r, t\right)} E\left(e_{2}, r, t\right)+\sum_{\left(h, r, e_{1}\right)} E\left(h, r, e_{2}\right)
+\end{align}
+
+Source code comes from OpenEA \cite{Sun2020ABS}. To ensure the provided code can achieve the performance reported in the original paper, I re-run the model on the cross-lingual entity alignment dataset EN-FR-15K-V1. The results (Table ~\ref{tab:results-on-en-fr-15k-v1} are pretty close to the reported results (Table 5 in \citep{Sun2020ABS}. So I applied them to align the ConceptNet and SWOW.
+
+\subsubsection{Results on EN-FR-15K}
+\begin{table}[!ht]
+  \begin{adjustbox}{max width=\textwidth}
+    \centering
+    \begin{tabular}{@{}llllllllllllll@{}}
+                               &                     & Hits@1 &        & Hits@5 &        & Hits@10 &        & Hits@50 &        & MR         &          & MRR    &        \\\hline
+                               &                     & avg.   & std.   & avg.   & std.   & avg.    & std.   & avg.    & std.   & avg.       & std.     & avg.   & std.   \\\hline
+\multirow{4}{*}{EN-FR-15K\_V1} & MTransE (reported)  & 0.2468 & 0.0056 & 0.4672 & 0.0086 & 0.5640  & 0.0093 & 0.7335  & 0.0160 & 251.9440   & 27.4550  & 0.3510 & 0.0070 \\
+                               & IPtransE (reported) & 0.1690 & 0.0134 & 0.3204 & 0.0248 & 0.3903  & 0.0319 & 0.5289  & 0.0380 & 1,070.3200 & 136.4690 & 0.2430 & 0.0190 \\
+                               & MTransE (re-run)    & 0.2498 & 0.0087 & 0.4680 & 0.0130 & 0.5637  & 0.0146 & 0.7328  & 0.0119 & 252.6916   & 13.5268  & 0.3528 & 0.0103 \\
+                               & IPtransE (re-run)   & 0.1595 & 0.0111 & 0.3097 & 0.0215 & 0.3769  & 0.0252 & 0.5136  & 0.0275 & 1121.3191  & 111.3839 & 0.2323 & 0.0161\\\hline
+\end{tabular}
+\end{adjustbox}
+\caption{Results on EN-FR-15K-V1.}
+\label{tab:results-on-en-fr-15k-v1}
+\end{table}
+
+\subsection{Conceptnet-SWOW Alignment}
+\subsubsection{Data Creation}
+For both ConceptNet and SWOW, all the train, valid and test datasets are combined together to get the aligned entity seeds. The alignment is based on the string match, which generates 8,382 pairs of aligned entities. The statistics of source ConceptNet and SWOW are shown in Table~\ref{tab:concpetnet-swow-source-statistics}.
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{c|cccc}
+    \hline
+         Dataset &  edges	  & nodes&	overlaped\_nodes &	overlaped\_edges (one\_hop) \\\hline
+        CN-100K &	102,400   &78,334 &	8,382 (10.70\%)	& 123,04 (12.01\%) \\
+        SWOW & 413,481 &	34,831 &  8,382 (24.07\%)	& 123,04 (2.976\%) \\\hline
+    \end{tabular}
+    \caption{ConceptNet and SWOW source statistics}
+    \label{tab:concpetnet-swow-source-statistics}
+\end{table}
+
+After that, the 8,382 pairs are split into test, train, and valid sets to train the model. Five-cross validation are used to train the model by following \cite{Sun2020ABS}. Two version of split are created, shown in Table~\ref{tab:c-s-721-271}.
+\begin{table}[!ht]
+    \centering
+    \begin{tabular}{c|ccc}
+    \hline
+         DataSplits &  Test	 &  Train &	Valid 	\\\hline
+         C\_S\_721 &5,868	 & 1,676   &838	  \\
+         C\_S\_271 &1,676     &5,868 	 &  838 \\\hline
+    \end{tabular}
+    \caption{ConceptNet and SWOW source statistics.}
+    \label{tab:c-s-721-271}
+\end{table}
+
+\subsubsection{Baseline Results}
+\begin{table}[!h]
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{@{}llllllllllllll@{}}
+                           &         & Hits@1 &        & Hits@5 &        & Hits@10 &        & Hits@50 &        & MR        &         & MRR    &        \\\hline
+                           &         & avg.   & std.   & avg.   & std.   & avg.    & std.   & avg.    & std.   & avg.      & std.    & avg.   & std.   \\\hline
+\multirow{2}{*}{C\_S\_721} & MTransE & 0.001  & 0.0003 & 0.0034 & 0.0003 & 0.0065  & 0.0003 & 0.0226  & 0.0012 & 2749.9197 & 16.1273 & 0.0038 & 0.0002 \\
+                           & ITransE & 0.0084 & 0.0021 & 0.0264 & 0.0041 & 0.0397  & 0.0048 & 0.0905  & 0.0076 & 1994.6643 & 69.0998 & 0.0203 & 0.0029 \\ \hline
+C\_S\_271                  & MTransE & 0.0066 & 0.0027 & 0.0202 & 0.0046 & 0.0274  & 0.0044 & 0.0605  & 0.0062 & 781.1016  & 11.1268 & 0.0159 & 0.0034 \\
+                           & ITransE & 0.1169 & 0.0215 & 0.2227 & 0.0317 & 0.2777  & 0.0409 & 0.4269  & 0.0447 & 334.358   & 42.8182 & 0.1732 & 0.0264 \\\hline
+\end{tabular}
+\end{adjustbox}
+\caption{Results on ConceptNet-SWOW aligned datasets.}
+\label{tab:baseline-results-cs721-271}
+\end{table}
+
+It can be seen from the Table~\ref{tab:baseline-results-cs721-271} iterative update the aligned entity seeds indeed help the alignments. But the two models are different in many aspects. For example, the ITransE use negative sampling when learn node embeddings, and the current model use the parameter sharing mechanism to regularize the aligned entity pairs (that's why the align-loss in Table~\ref{tab:model-losses}.
+These aspects may also influence the model. 
+
+Besides, I will further observe how the model newly aligned entities looks like. 
+
+\cite{Sun2020ABS} also show that BootEA \cite{sun-etal-2018-BootEa} is more good at align new entities, I will have a look at whether it is suitable for our situation.
+
+\section{Meeting Notes}
+\textbf{Discussion}
+\begin{itemize}
+    \item  Problem: TransE requires relation types to learn better embedding, but edges in SWOW is not labelled.
+    \item  Solution: Cluster (h,t) pairs in SWOW so that TransE can differentiate different kind of relations.
+\end{itemize}
+
+
+\noindent \textbf{To do list}
+\begin{enumerate}
+    \item Figure out how to learn the cluster \\(I would be very appreciate if you can give me more hints about the methodology, still a little bit confusing how. Are we going to learn it jointly with the alignment or we design another model to learn it beforehand? Sorry that I don't have any practical cluster experience.)
+    \item Verify the assumption that with clustered SWOW and ConceptNet, we can learn better alignment 
+\end{enumerate}
+
+\begin{comment}
+% 28:00  Lea: use cocnept 
+How do we use ConceptNet sensibly?  
+use ConceptNet to distinguish the relations in SWOW, although we don't have it 
+The relation types in ConceptNet can help us classify the SWOW relation types
+
+30:40 Trevor 
+Gating
+
+34:40: cluster of relations type for SWOW 
+every 
+K random relations, each is a combinations of 
+
+41:00
+Talk about the alignment problem: SWOW has only 20\% of nodes in ConceptNet-100K but 80\% in Conceptnet5.7 
+
+There could be 
+\end{comment}
+
+
+\begin{comment}
+Miscellaneous: 
+How to deal with the relation types in SWOW?
+    \begin{itemize}
+        \item use pre-trained language model (eg:Comet) to generate the relation types?
+        \item  
+    \end{itemize}
+How to determine whether two triples are aligned or not? (where is the upper bound?)
+How to select the training triples? (training graph)
+\end{comment}
+%Shared_entities:26703, take in ConceptNet: 0.8786 and SWOW: 0.7667 
+%Aligned entities: test: 5341 train: 18692 valid: 2670
+
+\begin{comment}
+\subsection{Comments for ITransE}
+
+Originally paper: Note that, since relations are universal and thus in this paper, we suppose all relations are already shared among various KGs.
+ITransE requires all relations being shared among KGs. \cite{Zhu2017IterativeEA}
+
+comments:\\
+Because the approach
+ITransE performs iterative alignment and it requires two KGs sharing the same relations, we
+do not include it in the comparison.  \cite{wang-etal-2018-cross}
+
+
+ITransE is used to align entities across
+monolingual KGs with coherent vocabularies and triples, but
+we find it does not adapt well to the inconsistent multilingual scenario.
+ITransE works well on aligning coherent monolingual KGs [Zhu et al., 2017], but does
+not adapt well to the inconsistent multilingual KGs. \cite{Chen2018CotrainingEO}
+
+IPTransE fails to achieve good performance,
+because it involves many errors as the self-training continues
+but does not design a mechanism to eliminate these errors.
+KDCoE propagates new alignment by co-training two orthogonal types of features, i.e., relation triples and textual
+descriptions. However, this strategy does not bring improvement, due to some entities may lack textual descriptions. For
+BootEA, it employs a heuristic editing method to remove
+wrong alignment. After undergoing a period of fluctuations,
+the precision stays stable while the recall continues growing
+during self-training, which brings a clear performance boost.
+Therefore, the design of semi-supervised learning strategies
+has a strong influence on the final performance.
+BootEA [21] adopts a bootstrapping approach
+and iteratively labels the most likely alignments and utilizes them for further
+training. In addition to the alignment loss, embeddings of aligned entities are
+swapped regularly to calibrate embedding spaces against each other.
+
+MTransE [5] learns a linear transformation between the embedding spaces of the individual graphs using L2-loss
+
+IPTransE [29] embeds both KGs into the
+same embedding space and uses a margin-based loss to enforce the embeddings
+of aligned entities to become similar. 
+
+\begin{table}[!h]
+\begin{adjustbox}{max width=\textwidth}
+    \begin{tabular}{l|llll|llll}
+        & \multicolumn{4}{c|}{CN-100K}  & \multicolumn{4}{c}{SWOW}     \\\hline
+       & MRR  & HITS@1 & HITS@3     & HITS@10
+       & MRR  & HITS@1   & HITS@3   & HITS@10    \\\hline
+MTransE   & 0.2980   & 0.2125  & 0.3304  & 0.4750   & -    & - & - & - \\
+ITransE & 0.2942 \pm 0.0084 & 0.2078 \pm 0.0093 & 0.3254 \pm 0.0105 & 0.4736 \pm 0.0054 & 0.1816 \pm 0.0030&	0.1157 \pm 0.0029&	0.1924 \pm 0.0027&	0.3141  \pm0.0059  \\ 
+        \hline                
+    \end{tabular}
+    \end{adjustbox}
+    \caption{Results from baseline model GCN\_CONVTRANSE.}
+    \label{Tab:GCN-CONVTRANSE-baseline}
+\end{table}
+
+Shared_vocab:8382, take in ConceptNet: 0.1070 and SWOW: 0.2407 
+\end{comment}

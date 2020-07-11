@@ -1,0 +1,118 @@
+\documentclass{report}
+%\usepackage[utf8]{inputenc}
+\usepackage{outlines}
+\usepackage{fancyvrb}
+\usepackage[round, authoryear]{natbib}
+%\bibliographystyle{plainnat}
+\usepackage[breaklinks,colorlinks,linkcolor=black,citecolor=blue,urlcolor=blue, anchorcolor=blue,bookmarks=true]{hyperref}
+\usepackage[a4paper, total={6in, 10in},top=1.2in, bottom=0.7in, includefoot]{geometry}
+\usepackage{adjustbox}
+%$\usepackage[export]{adjustbox}
+\usepackage{graphicx}
+\graphicspath{{./images/}}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{hyperref}
+\usepackage{comment}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\usepackage{pdfpages}
+
+%New colors defined below
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+%Code listing style named "mystyle"
+\lstdefinestyle{mystyle}{
+  backgroundcolor=\color{backcolour},   commentstyle=\color{codegreen},
+  keywordstyle=\color{magenta},
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=false,         
+  breaklines=true,                 
+  captionpos=b,                    
+  keepspaces=true,                 
+  numbers=left,                    
+  numbersep=5pt,                  
+  showspaces=false,                
+  showstringspaces=false,
+  showtabs=false,                  
+  tabsize=2
+}
+
+%"mystyle" code listing set
+\lstset{style=mystyle}
+
+%to do list with progress
+
+\usepackage{enumitem,amssymb,amsmath}
+\newlist{todolist}{enumerate}{2}
+\setlist[todolist]{label=$\square$}
+\usepackage{pifont}
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+\newcommand{\done}{\rlap{$\square$}{\raisebox{2pt}{\large\hspace{1pt}\cmark}}%
+\hspace{-2.5pt}}
+\newcommand{\wontfix}{\rlap{$\square$}{\large\hspace{1pt}\xmark}}
+\usepackage{fontawesome}
+ %\usepackage{algorithm}
+\usepackage[ruled,vlined]{algorithm2e}
+%\usepackage{algorithmic}
+\usepackage{float}
+\usepackage{arevmath}     % For math symbols
+\usepackage[noend]{algpseudocode}
+
+\usepackage{cancel} %strike through
+\usepackage[normalem]{ulem}
+%\newcommand{\done}{\rlap{$\square$}{\raisebox{2pt}{\large\hspace{1pt}\cmark}}%
+\usepackage{csvsimple}
+\title{Commonsense Knowledge Graph Completion }
+\author{Chunhua Liu}
+%\date{Version 0.3,  21 April, 2020}
+
+
+\begin{document}
+
+    \maketitle
+    
+%    \begin{abstract}
+        
+%    \end{abstract}
+    
+    \thispagestyle{empty}
+    \tableofcontents
+    \thispagestyle{empty}
+    \newpage
+    \setcounter{page}{1}
+    
+%\tableofcontents
+%% 符号对照表
+%\input{data/denotation}
+
+%%% 正文部分
+\include{data/2020-07-07}
+
+\include{data/2020-06-30}
+\include{data/2020-06-23}
+\begin{comment}
+\include{data/2020-06-16}
+\include{data/2020-06-09}
+\include{data/2020-06-02}
+\include{data/2020-05-26}
+\include{data/2020-05-19}
+\include{data/2020-05-12}
+\include{data/2020-05-05}
+\end{comment}
+\include{data/2020-04-28}
+\include{data/2020-04-21}
+
+\bibliography{references}
+\end{document}
+
+
+
+
