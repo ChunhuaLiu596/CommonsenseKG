@@ -57,21 +57,25 @@ class KGs:
             self.kg2 = self.init_kg(kg2, self.ent_ids2, self.rel_ids2)
 
             #??? choose which one to for evaluation? maybe both?
-            self.kg_test = self.init_kg(kg_test, self.ent_ids1, self.rel_ids1)
-            self.kg_valid = self.init_kg(kg_valid, self.ent_ids1, self.rel_ids1)
-            self.create_filter_rank_dict(self.kg1.relation_triples_list)
+            self.kg1_test = self.init_kg(kg_test, self.ent_ids1, self.rel_ids1)
+            self.kg1_valid = self.init_kg(kg_valid, self.ent_ids1, self.rel_ids1)
+            self.create_filter_rank_dict(self.kg1.relation_triples_list, self.kg1_test, self.kg1_valid)
+
+            self.kg2_test = self.init_kg(kg_test, self.ent_ids2, self.rel_ids2)
+            self.kg2_valid = self.init_kg(kg_valid, self.ent_ids2, self.rel_ids2)
+            self.create_filter_rank_dict(self.kg2.relation_triples_list, self.kg2_test, self.kg2_valid)
 
             self.relations_classes = self.kg1.relations_classes
-            self.entities_num = len(self.kg1.entities_set | self.kg2.entities_set | self.kg_test.entities_set | self.kg_valid.entities_set)
-            self.relations_num = len(self.kg1.relations_set | self.kg2.relations_set | self.kg_test.relations_set | self.kg_valid.relations_set)
+            self.entities_num = len(self.kg1.entities_set | self.kg2.entities_set | self.kg1_test.entities_set | self.kg1_valid.entities_set)
+            self.relations_num = len(self.kg1.relations_set | self.kg2.relations_set | self.kg1_test.relations_set | self.kg1_valid.relations_set)
 
             self.rel_ids_mask = self.kg1.id_relations_dict
             self.relations_mask_num = len(self.rel_ids_mask.values())
 
             self.init_align_links(train_links, test_links, valid_links, mode)
 
-            print("All entities_num: {}, kg1: {}, kg2: {}, kg_test: {}, kg_valid: {}".format(self.entities_num, len(self.kg1.entities_set),
-                                            len(self.kg2.entities_set), len(self.kg_test.entities_set) , len(self.kg_valid.entities_set)))
+            print("All entities_num: {}, kg1: {}, kg2: {}, kg1_test: {}, kg1_valid: {}".format(self.entities_num, len(self.kg1.entities_set),
+                                            len(self.kg2.entities_set), len(self.kg1_test.entities_set) , len(self.kg2_valid.entities_set)))
 
         #sys.exit()
 
@@ -121,11 +125,11 @@ class KGs:
         kg.set_id_dict(ent_ids, rel_ids)
         return kg
 
-    def create_filter_rank_dict(self, id_relation_triples):
+    def create_filter_rank_dict(self, id_relation_triples, kg_test, kg_valid):
         #For filtering rank
-        self.set_multi_entities_dict(id_relation_triples + self.kg_test.relation_triples_list + self.kg_valid.relation_triples_list)
-        self.kg_valid.set_local_multi_entities_dict(self.hr_to_multi_t, self.tr_to_multi_h)
-        self.kg_test.set_local_multi_entities_dict(self.hr_to_multi_t, self.tr_to_multi_h)
+        self.set_multi_entities_dict(id_relation_triples + kg_test.relation_triples_list + kg_valid.relation_triples_list)
+        kg_valid.set_local_multi_entities_dict(self.hr_to_multi_t, self.tr_to_multi_h)
+        kg_test.set_local_multi_entities_dict(self.hr_to_multi_t, self.tr_to_multi_h)
 
     def init_align_links(self, train_links, test_links, valid_links, mode):
         #For alignment evaluation

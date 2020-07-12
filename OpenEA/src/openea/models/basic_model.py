@@ -290,10 +290,12 @@ class BasicModel:
                 gc.collect()
         print("Training ends. Total time = {:.3f} s.".format(time.time() - t))
 
-    def reload_model(self):
+    def reload_model(self, checkpoint_dir=None):
         #saver = tf.train.import_meta_graph(self.args.model_meta_path)
         saver = tf.compat.v1.train.Saver()
-        saver.restore(self.session, tf.train.latest_checkpoint(self.args.checkpoint_dir))
+        if checkpoint_dir is None:
+            checkpoint_dir = self.args.checkpoint_dir
+        saver.restore(self.session, tf.train.latest_checkpoint(checkpoint_dir))
 
     def load_pretrain_emb(self):
         dir = self.out_folder.split("/")

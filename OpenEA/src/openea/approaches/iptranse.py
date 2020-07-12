@@ -84,7 +84,8 @@ class IPTransE(BasicModel):
             self._define_summary_writers()
             tf.compat.v1.global_variables_initializer().run(session=self.session)
             self.saver = tf.compat.v1.train.Saver()
-
+            self.checkpoint_dir =  "{}model/".format(self.out_folder)
+            self.save_path = self.saver.save(self.session, "{}model.ckpt".format(self.checkpoint_dir))
         #if self.args.load_pretrain_model:
         #    self.reload_model()
 
@@ -138,15 +139,16 @@ class IPTransE(BasicModel):
 
     def _define_summary_writers(self):
         train_dir = self.out_folder + "train/"
-        valid_dir = self.out_folder + "valid/"
-        test_dir = self.out_folder + "test/"
+        valid1_dir = self.out_folder + "valid1/"
+        valid2_dir = self.out_folder + "valid2/"
 
         self.writer_train = tf.compat.v1.summary.FileWriter(train_dir, self.session.graph)
-        self.writer_valid = tf.compat.v1.summary.FileWriter(valid_dir)
-        self.writer_test = tf.compat.v1.summary.FileWriter(test_dir)
+        self.writer_valid1 = tf.compat.v1.summary.FileWriter(valid1_dir)
+        self.writer_valid2 = tf.compat.v1.summary.FileWriter(valid2_dir)
         print("train summary dir: {}".format(train_dir))
-        print("valid summary dir: {}".format(valid_dir))
-        print("Open tensorboard: tensorboard --logdir=run1:\"{}\",run2:\"{}\",run3:\"{}\" ".format(train_dir, valid_dir, test_dir))
+        print("valid1 summary dir: {}".format(valid1_dir))
+        print("valid2 summary dir: {}".format(valid2_dir))
+        print("Open tensorboard: tensorboard --logdir=run1:\"{}\",run2:\"{}\",run3:\"{}\" ".format(train_dir, valid1_dir, valid2_dir))
 
     def _define_placeholders(self):
         with tf.name_scope("train_placeholders"):
@@ -306,16 +308,13 @@ class IPTransE(BasicModel):
             else:
                 self.train_merged = tf.compat.v1.summary.merge([train_sum_lt])
         else:
-            valid_sum_lt = tf.compat.v1.summary.scalar("pos_triple_loss", self.eval_triple_loss)
             if self.args.predict_relation:
                 valid_sum_ra =tf.compat.v1.summary.scalar("rel_acc", self.eval_rel_acc)
                 valid_sum_lp = tf.compat.v1.summary.scalar("rel_entropy_loss", self.eval_rel_entropy_loss)
                 valid_sum_lr =tf.compat.v1.summary.scalar("rel_cross_entropy_loss", self.eval_rel_cross_entropy_loss)
-                valid_sum_l =tf.compat.v1.summary.scalar("eval_loss", self.eval_loss)
+                #valid_sum_l =tf.compat.v1.summary.scalar("eval_loss", self.eval_loss)
                 if self.args.mode=="train":
-                    self.valid_merged = tf.compat.v1.summary.merge([valid_sum_lt, valid_sum_ra,valid_sum_lr, valid_sum_lp, valid_sum_l, self.sum_rel])
-            else:
-                self.valid_merged = tf.compat.v1.summary.merge([valid_sum_lt])
+                    self.valid_merged = tf.compat.v1.summary.merge([valid_sum_ra, valid_sum_lr, valid_sum_lp, self.sum_rel])
                                                     #self.sum_ent, self.sum_rel])
     def _add_metrics_summary(self, metrics, writer, epoch):
         for key, value in metrics.items():
@@ -513,12 +512,12 @@ class IPTransE(BasicModel):
     def launch_ptranse_evaluation(self, kg_eval, writer, type='valid', epoch=None, draw_confm=False, save=False):
 
         if self.args.train_kg=="kg12":
-            flag1 = self.launch_ptranse_evaluate_alignment(kg_eval, writer, type, epoch, save)
-            flag2 = self.launch_ptranse_evaluate_completion(kg_eval, writer, type, epoch, draw_confm, save)
+            flag1 = self.launch_ptranse_evaluate_completion(kg_eval, writer, type, epoch, draw_confm, save)
+            flag2 = self.launch_ptranse_evaluate_alignment(kg_eval, writer, type, epoch, save)
             return 0.5*(flag1 + flag2)
         else:
-            flag2 = self.launch_ptranse_evaluate_completion(kg_eval, writer, type, epoch, draw_confm, save)
-            return flag2
+            flag1 = self.launch_ptranse_evaluate_completion(kg_eval, writer, type, epoch, draw_confm, save)
+            return flag1
 
     def launch_ptranse_evaluate_alignment(self, kg_eval, writer, type='valid', epoch=None, save=False):
         if type=='valid':
@@ -528,7 +527,7 @@ class IPTransE(BasicModel):
 
         if epoch is not None:
             with tf.name_scope("alignment_metrics"):
-                metrics = {"align_mrr": mr, "align_mr": mrr,
+                metrics = {"align_mr": mr, "align_mrr": mrr,
                             "align_hits1": hits[0], "align_hits10": hits[2]}
                 self._add_metrics_summary(metrics, writer, epoch)
 
@@ -584,8 +583,6 @@ class IPTransE(BasicModel):
                 self._add_metrics_summary(metrics, writer, epoch)
             writer.flush()
 
-        print("completion results: hits@{} = {}, mr = {:.4f}, mrr = {:.4f}, rank_candidates: {}, time = {:.3f} s. ".
-                format(self.args.top_k, hits, mr, mrr, entities_num, time.time() - start))
 
         if self.args.predict_relation:
             print("relation results: valid_rel_acc = {:.4f}, triples: {} ".format(rel_acc, triples_num))
@@ -593,6 +590,9 @@ class IPTransE(BasicModel):
                 rel_ids = sorted(set( np.argmax(vals["relation_pred"], 1)) | set(np.argmax(vals["relation_label"], 1)))
                 rel_classes = kg_eval.get_rel_classes(rel_ids, self.kgs.relations_classes)
                 plot_confusion_matrix_from_data(np.argmax(vals["relation_label"],1), np.argmax(vals["relation_pred"],1), columns= rel_classes,fz=14, figsize=[len(rel_classes)+1, len(rel_classes)+1], show_null_values=0, save_name= self.out_folder+'test_confusion_matrix.png')
+
+        print("completion results: hits@{} = {}, mr = {:.4f}, mrr = {:.4f}, rank_candidates: {}, time = {:.3f} s. ".
+                format(self.args.top_k, hits, mr, mrr, entities_num, time.time() - start))
 
         if save:
             write_rank_to_file(kg_eval, hits_12_list, hits_21_list, kg_eval.local_id_entities_dict,
@@ -628,29 +628,43 @@ class IPTransE(BasicModel):
             self.launch_triple_training_1epo(epoch, triple_steps, steps_tasks, training_batch_queue)
 
             if epoch % self.args.eval_freq == 0:
-                flag = self.launch_ptranse_evaluation(self.kgs.kg_valid, writer=self.writer_valid, type='valid',epoch=epoch)
-                self.launch_ptranse_evaluation(self.kgs.kg_test,  writer=self.writer_test, type='test', epoch=epoch)
+                print("Evalute on kg1_valid")
+                flag_kg1 = self.launch_ptranse_evaluation(self.kgs.kg1_valid, writer=self.writer_valid1, type='valid',epoch=epoch)
+
+                print("\nEvalute on kg2_valid")
+                flag_kg2 = self.launch_ptranse_evaluation(self.kgs.kg2_valid, writer=self.writer_valid2, type='valid',epoch=epoch)
+
+                flag = 0.5*(flag_kg1 + flag_kg2)
+
+                self._add_metrics_summary({"stop_metric_"+self.args.stop_metric:flag}, self.writer_valid1, epoch)
+                #self.launch_ptranse_evaluation(self.kgs.kg_test,  writer=self.writer_test, type='test', epoch=epoch)
 
                 if flag> self.best_flag:
-                    save_path = self.saver.save(self.session, "{}model/model.ckpt".format(self.out_folder))
                     self.best_epoch = epoch
                     self.best_flag = flag
-                    print("Model saved in path: {}, best_epoch: {}".format(save_path, self.best_epoch))
+                    print("Model saved in path: {}, best_epoch: {}".format(self.save_path, self.best_epoch))
 
                 if self.args.stop_metric=="max_epoch" and epoch==self.args.max_epoch:
                     break
-                elif epoch - self.best_epoch > self.args.early_stop_patience and epoch> self.args.start_valid:
+                elif (epoch - self.best_epoch)% self.args.eval_freq > self.args.early_stop_patience and epoch> self.args.start_valid:
                     break
 
         print("Training ends. Total time = {:.3f} s.".format(time.time() - t))
 
         ##### Test #####
+        print("Best epoch: {}".format(self.best_epoch))
         print("\nStart testing ...")
-        self.launch_ptranse_evaluation(self.kgs.kg_test,  writer=None, type='test', epoch=None, draw_confm=True, save=True)
+        self.reload_model(self.checkpoint_dir)
+        print("Test kg1_test")
+        self.launch_ptranse_evaluation(self.kgs.kg1_test,  writer=None, type='test', epoch=None, draw_confm=True, save=True)
+
+        print("Test kg2_test")
+        self.launch_ptranse_evaluation(self.kgs.kg2_test,  writer=None, type='test', epoch=None, draw_confm=True, save=True)
 
 
     def retest(self, save=True):
         self.check_norm()
         if self.args.train_kg=="kg12":
             self.retest_alignment(save)
-        self.launch_ptranse_evaluate_completion(self.kgs.kg_test, writer=None, type='test', epoch=None, draw_confm=False, save=True)
+        self.launch_ptranse_evaluate_completion(self.kgs.kg1_test, writer=None, type='test', epoch=None, draw_confm=False, save=True)
+        self.launch_ptranse_evaluate_completion(self.kgs.kg2_test, writer=None, type='test', epoch=None, draw_confm=False, save=True)
