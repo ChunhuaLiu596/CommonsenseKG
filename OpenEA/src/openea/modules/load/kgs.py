@@ -16,9 +16,9 @@ class KGs:
 
         if train_kg=="kg1":
             self.kg1 = self.init_kg(kg1, self.ent_ids1, self.rel_ids1)
-            self.kg_test = self.init_kg(kg_test, self.ent_ids1, self.rel_ids1)
-            self.kg_valid = self.init_kg(kg_valid, self.ent_ids1, self.rel_ids1)
-            self.create_filter_rank_dict(self.kg1.relation_triples_list)
+            self.kg1_test = self.init_kg(kg_test, self.ent_ids1, self.rel_ids1)
+            self.kg1_valid = self.init_kg(kg_valid, self.ent_ids1, self.rel_ids1)
+            self.create_filter_rank_dict(self.kg1.relation_triples_list, self.kg1_test, self.kg1_valid)
 
             self.relations_classes = self.kg1.relations_classes
             self.entities_num = len(self.ent_ids1.values())
@@ -27,16 +27,16 @@ class KGs:
             self.rel_ids_mask = self.kg1.id_relations_dict
             self.relations_mask_num = len(self.rel_ids_mask.values())
 
-            assert self.entities_num == len(self.kg1.entities_set |  self.kg_test.entities_set | self.kg_valid.entities_set)
-            assert self.relations_num == len(self.kg1.relations_set | self.kg_test.relations_set | self.kg_valid.relations_set)
+            assert self.entities_num == len(self.kg1.entities_set |  self.kg1_test.entities_set | self.kg1_valid.entities_set)
+            assert self.relations_num == len(self.kg1.relations_set | self.kg1_test.relations_set | self.kg1_valid.relations_set)
             print("All entities_num: {},  kg1: {}, kg_test: {}, kg_valid: {}".format(self.entities_num, len(self.kg1.entities_set),
-                                                                len(self.kg_test.entities_set) , len(self.kg_valid.entities_set)))
+                                                                len(self.kg1_test.entities_set) , len(self.kg1_valid.entities_set)))
 
         elif train_kg=="kg2":
             self.kg2 = self.init_kg(kg2, self.ent_ids2, self.rel_ids2)
-            self.kg_test = self.init_kg(kg_test, self.ent_ids2, self.rel_ids2)
-            self.kg_valid = self.init_kg(kg_valid, self.ent_ids2, self.rel_ids2)
-            self.create_filter_rank_dict(self.kg2.relation_triples_list)
+            self.kg2_test = self.init_kg(kg_test, self.ent_ids2, self.rel_ids2)
+            self.kg2_valid = self.init_kg(kg_valid, self.ent_ids2, self.rel_ids2)
+            self.create_filter_rank_dict(self.kg2.relation_triples_list, self.kg2_test, self.kg2_valid)
 
             self.relations_classes = self.kg2.relations_classes
             self.entities_num = len(self.ent_ids2.values())
@@ -47,10 +47,10 @@ class KGs:
             self.rel_ids_mask  = {v:k for k, v in rel_ids_mask.items()}
             self.relations_mask_num = len(self.rel_ids_mask.values())
 
-            assert self.entities_num == len(self.kg2.entities_set |  self.kg_test.entities_set | self.kg_valid.entities_set)
-            assert self.relations_num == len(self.kg2.relations_set | self.kg_test.relations_set | self.kg_valid.relations_set)
+            assert self.entities_num == len(self.kg2.entities_set |  self.kg2_test.entities_set | self.kg2_valid.entities_set)
+            assert self.relations_num == len(self.kg2.relations_set | self.kg2_test.relations_set | self.kg2_valid.relations_set)
             print("All entities_num: {},  kg2: {}, kg_test: {}, kg_valid: {}".format(self.entities_num, len(self.kg2.entities_set),
-                                                                len(self.kg_test.entities_set) , len(self.kg_valid.entities_set)))
+                                                                len(self.kg2_test.entities_set) , len(self.kg2_valid.entities_set)))
 
         elif train_kg=="kg12":
             self.kg1 = self.init_kg(kg1, self.ent_ids1, self.rel_ids1)

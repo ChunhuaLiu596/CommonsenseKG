@@ -16,7 +16,7 @@ def rank_alignment(embeds1, embeds2, mapping, top_k, threads_num, metric='inner'
     cost = time.time() - t
     rank_candidates_num = len(hits_12_list)
     if accurate:
-        print("alignment results: hits@{} = {}, mr = {:.4f}, mrr = {:.4f}, rank_candidates: {}, time = {:.3f} s. ".
+        print("alignment  results: hits@{} = {}, mr = {:.4f}, mrr = {:.4f}, rank_candidates: {}, time = {:.3f} s. ".
                     format(top_k, hits_12, mr_12, mrr_12, rank_candidates_num, cost))
     return mr_12, mrr_12, hits_12, hits_12_list
 
@@ -44,7 +44,7 @@ def rank_alignment_bidirection(embeds1, embeds2, mapping, top_k, threads_num, me
             print("alignment results with csls: csls={}, hits@{} = {}, mr = {:.4f}, mrr = {:.4f}, rank_candidates: {}, time = {:.3f} s ".
                     format(csls_k, top_k, hits, mr, mrr, rank_candidates_num, cost))
         else:
-            print("alignment results: hits@{} = {}, mr = {:.4f}, mrr = {:.4f}, rank_candidates: {}, time = {:.3f} s. ".
+            print("alignment  results: hits@{} = {}, mr = {:.4f}, mrr = {:.4f}, rank_candidates: {}, time = {:.3f} s. ".
                     format(top_k, hits, mr, mrr, rank_candidates_num, cost))
     else:
         if csls_k > 0:

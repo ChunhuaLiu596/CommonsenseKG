@@ -55,12 +55,12 @@ echo "py code: " "${py_code}"
 
 #beta1s=(0.1 0.11 0.12 0.125 0.13 0.14 0.145 0.15 0.16 0.17 0.175 0.18 0.19 0.2)
 
-beta1s=(2)
+beta1s=(2 2 2)
 beta2s=(1 1 1 1)
 lrs=(0.07 0.07 0.07 0.07)
-train_kgs=("kg12" "kg2" "kg12" "kg12")
-predict_relations=(true true true true)
-align_modules=("sharing" "non-sharing" "non-sharing" "sharing")
+train_kgs=("kg1" "kg2" "kg12")
+predict_relations=(false false false)
+align_modules=("non-sharing" "non-sharing" "sharing")
 maximum_count=3
 count=0
 

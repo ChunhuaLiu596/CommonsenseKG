@@ -312,9 +312,8 @@ class IPTransE(BasicModel):
                 valid_sum_ra =tf.compat.v1.summary.scalar("rel_acc", self.eval_rel_acc)
                 valid_sum_lp = tf.compat.v1.summary.scalar("rel_entropy_loss", self.eval_rel_entropy_loss)
                 valid_sum_lr =tf.compat.v1.summary.scalar("rel_cross_entropy_loss", self.eval_rel_cross_entropy_loss)
-                #valid_sum_l =tf.compat.v1.summary.scalar("eval_loss", self.eval_loss)
-                if self.args.mode=="train":
-                    self.valid_merged = tf.compat.v1.summary.merge([valid_sum_ra, valid_sum_lr, valid_sum_lp, self.sum_rel])
+                #if self.args.mode=="train":
+                self.valid_merged = tf.compat.v1.summary.merge([valid_sum_ra, valid_sum_lr, valid_sum_lp, self.sum_rel])
                                                     #self.sum_ent, self.sum_rel])
     def _add_metrics_summary(self, metrics, writer, epoch):
         for key, value in metrics.items():
@@ -544,7 +543,7 @@ class IPTransE(BasicModel):
                     "distance_t_pred":self.distance_t_pred,
                     "distance_h_pred":self.distance_h_pred}
 
-        if self.args.mode=="train":
+        if self.args.mode=="train" and self.args.predict_relation:
             fetches.update({"summary": self.valid_merged})
 
         if self.args.predict_relation:
@@ -575,14 +574,14 @@ class IPTransE(BasicModel):
 
         mr, mrr, hits, hits_12_list, hits_21_list = calculate_rank_bidirection(kg_eval.local_relation_triples_list, vals["distance_t_pred"], vals["distance_h_pred"], self.args.top_k, kg_eval.local_hr_to_multi_t, kg_eval.local_tr_to_multi_h)
 
-        if epoch is not None:
-            writer.add_summary(vals["summary"], epoch)
+        if epoch is not None :
+            if self.args.predict_relation:
+                writer.add_summary(vals["summary"], epoch)
             with tf.name_scope("completion_metrics"):
                 metrics = {"completion_mr": mr, "completion_mrr": mrr,
                         "completion_hits1": hits[0], "completion_hits10": hits[2] }
                 self._add_metrics_summary(metrics, writer, epoch)
             writer.flush()
-
 
         if self.args.predict_relation:
             print("relation results: valid_rel_acc = {:.4f}, triples: {} ".format(rel_acc, triples_num))
@@ -628,14 +627,20 @@ class IPTransE(BasicModel):
             self.launch_triple_training_1epo(epoch, triple_steps, steps_tasks, training_batch_queue)
 
             if epoch % self.args.eval_freq == 0:
-                print("Evalute on kg1_valid")
-                flag_kg1 = self.launch_ptranse_evaluation(self.kgs.kg1_valid, writer=self.writer_valid1, type='valid',epoch=epoch)
+                if self.args.train_kg=="kg1":
+                    print("Evalute on kg1_valid")
+                    flag = self.launch_ptranse_evaluation(self.kgs.kg1_valid, writer=self.writer_valid1, type='valid',epoch=epoch)
+                elif self.args.train_kg=="kg2":
+                    print("\nEvalute on kg2_valid")
+                    flag = self.launch_ptranse_evaluation(self.kgs.kg2_valid, writer=self.writer_valid2, type='valid',epoch=epoch)
+                if self.args.train_kg=="kg12":
+                    print("Evalute on kg1_valid")
+                    flag_kg1 = self.launch_ptranse_evaluation(self.kgs.kg1_valid, writer=self.writer_valid1, type='valid',epoch=epoch)
+                    print("\nEvalute on kg2_valid")
+                    flag_kg2 = self.launch_ptranse_evaluation(self.kgs.kg2_valid, writer=self.writer_valid2, type='valid',epoch=epoch)
 
-                print("\nEvalute on kg2_valid")
-                flag_kg2 = self.launch_ptranse_evaluation(self.kgs.kg2_valid, writer=self.writer_valid2, type='valid',epoch=epoch)
-
-                flag = 0.5*(flag_kg1 + flag_kg2)
-
+                    flag = 0.5*(flag_kg1 + flag_kg2)
+ 
                 self._add_metrics_summary({"stop_metric_"+self.args.stop_metric:flag}, self.writer_valid1, epoch)
                 #self.launch_ptranse_evaluation(self.kgs.kg_test,  writer=self.writer_test, type='test', epoch=epoch)
 
