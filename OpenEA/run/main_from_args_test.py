@@ -77,9 +77,19 @@ if __name__ == '__main__':
     args = load_args(sys.argv[1])
     args.training_data = args.training_data + sys.argv[2] + '/'
     args.dataset_division = sys.argv[3]
-    setattr(args, 'beta1', float(sys.argv[4]))
-    setattr(args, 'beta2', float(sys.argv[5]))
-    setattr(args, 'learning_rate', float(sys.argv[6]))
+    args.train_kg = sys.argv[4]
+    if sys.argv[5].lower() =='true':
+        args.predict_relation=True
+    elif sys.argv[5].lower() =='false':
+        args.predict_relation=False
+    #setattr(args, 'beta1', float(sys.argv[4]))
+    #setattr(args, 'beta2', float(sys.argv[5]))
+    #setattr(args, 'learning_rate', float(sys.argv[6]))
+    checkpoint_dir = args.output + args.embedding_module +'/' + sys.argv[2] + '/' + args.dataset_division + 'model/'
+    model_meta_path = checkpoint_dir +'model.ckpt.meta'
+    setattr(args, 'checkpoint_dir', checkpoint_dir)
+    setattr(args, 'model_meta_path', model_meta_path)
+
     args.exist_attr=False
     print("load arguments:", vars(args))
 
@@ -96,7 +106,10 @@ if __name__ == '__main__':
     model.set_args(args)
     model.set_kgs(kgs) 
     model.init()
-    model.reload_model()
-    model.retest()
+    #model.reload_model()
+    model.eval_test()
+    if args.eval_each_relation:
+        model.eval_kg_each_relation()
+
     print("Total run time = {:.3f} s.".format(time.time() - t))
 

@@ -82,7 +82,7 @@ if __name__ == '__main__':
     args.dataset_division = sys.argv[3]
     setattr(args, 'beta1', float(sys.argv[4]))
     setattr(args, 'beta2', float(sys.argv[5]))
-    setattr(args, 'learning_rate', float(sys.argv[6]))
+    setattr(args, 'learning_rate_rel', float(sys.argv[6]))
     args.train_kg= sys.argv[7]
     if sys.argv[8].lower() =='true':
         args.predict_relation=True
@@ -90,6 +90,10 @@ if __name__ == '__main__':
         args.predict_relation=False
 
     args.alignment_module=sys.argv[9]
+    args.rel_inp_dropout=float(sys.argv[10])
+    args.rel_hid_dropout=float(sys.argv[11])
+    args.rel_hidden_dim=float(sys.argv[12])
+    args.train_module=sys.argv[13]
     args.exist_attr=False
     print("load arguments:", vars(args))
 
@@ -111,7 +115,7 @@ if __name__ == '__main__':
     for v in tf.compat.v1.trainable_variables():
         print(v)
     model.run()
-#    model.test()
+    model.eval_test()
     model.save()
 
     print("Total run time = {:.3f} s.".format(time.time() - t))

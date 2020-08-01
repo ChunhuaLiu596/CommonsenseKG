@@ -68,12 +68,12 @@ def generate_triple_batch(triples, batch_size, ents_list):
 
 def generate_batch(kgs: KGs, paths1, paths2, batch_size, path_batch_size, step, neg_triple_num):
     pos_triples, neg_triples, _= bat.generate_relation_triple_batch(kgs.kg1.relation_triples_list,
-                                                                  kgs.kg2.relation_triples_list,
-                                                                  kgs.kg1.relation_triples_set,
-                                                                  kgs.kg2.relation_triples_set,
-                                                                  kgs.kg1.entities_list, kgs.kg2.entities_list,
-                                                                  batch_size, step,
-                                                                  None, None, neg_triple_num)
+                                                                    kgs.kg2.relation_triples_list,
+                                                                    kgs.kg1.relation_triples_set,
+                                                                    kgs.kg2.relation_triples_set,
+                                                                    kgs.kg1.entities_list, kgs.kg2.entities_list,
+                                                                    batch_size, step,
+                                                                    None, None, neg_triple_num)
     num1 = int(len(paths1) / (len(paths1) + len(paths2)) * path_batch_size)
     num2 = path_batch_size - num1
     pos_paths1 = random.sample(paths1, num1)
@@ -88,7 +88,7 @@ def generate_batch(kgs: KGs, paths1, paths2, batch_size, path_batch_size, step, 
 def generate_batch_queue(kgs: KGs, paths1, paths2, batch_size, path_batch_size, steps, neg_triple_num, out_queue):
     for step in steps:
         pos_triples, neg_triples, pos_paths1, neg_paths1 = generate_batch(kgs, paths1, paths2, batch_size,
-                                                                          path_batch_size, step, neg_triple_num)
+                                                                            path_batch_size, step, neg_triple_num)
         out_queue.put((pos_triples, neg_triples, pos_paths1, neg_paths1))
 
 

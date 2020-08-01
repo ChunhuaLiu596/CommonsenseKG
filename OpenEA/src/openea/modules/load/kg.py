@@ -142,6 +142,7 @@ class KG:
 
         self.set_local_id_dict()
         self.set_local_id_triples()
+        self.generate_relation_dict_triple_list()
 
     def add_sup_relation_triples(self, sup_triples):
         self.sup_relation_triples_set = set(sup_triples)
@@ -209,5 +210,16 @@ class KG:
                 #print("Number of rt_dict:", len(self.rt_dict))
         #print("Number of hr_dict:", len(self.hr_dict))
 
+    def generate_relation_dict_triple_list(self):
+        self.r_hrt_dict = dict()
+        self.local_r_hrt_dict = dict()
+        for h, r, t in self.relation_triples_list:
+            hrt_list = self.r_hrt_dict.get(r, list())
+            hrt_list.append((h, r, t))
+            self.r_hrt_dict[r] = hrt_list
 
-
+            local_hrt_list = self.local_r_hrt_dict.get(r, list())
+            local_hrt_list.append((self.global_local_ids_dict[h], r, self.global_local_ids_dict[t]))
+            self.local_r_hrt_dict[r] = local_hrt_list
+        print("Number of r_hrt_dict:", len(self.r_hrt_dict))
+        print("Number of local_r_hrt_dict:", len(self.local_r_hrt_dict))

@@ -30,7 +30,7 @@ class BasicModel:
     def set_args(self, args):
         self.args = args
         self.out_folder = generate_out_folder(self.args.output, self.args.training_data, self.args.dataset_division,
-                                              self.__class__.__name__)
+                                            self.__class__.__name__)
 
     def init(self):
         # need to be overwrite
@@ -79,9 +79,9 @@ class BasicModel:
     def _define_variables(self):
         with tf.variable_scope('relational' + 'embeddings'):
             self.ent_embeds = init_embeddings([self.kgs.entities_num, self.args.dim], 'ent_embeds',
-                                              self.args.init, self.args.ent_l2_norm)
+                                                self.args.init, self.args.ent_l2_norm)
             self.rel_embeds = init_embeddings([self.kgs.relations_num, self.args.dim], 'rel_embeds',
-                                              self.args.init, self.args.rel_l2_norm)
+                                                self.args.init, self.args.rel_l2_norm)
 
     def _define_embed_graph(self):
         with tf.name_scope('triple_placeholder'):
@@ -101,7 +101,7 @@ class BasicModel:
         with tf.name_scope('triple_loss'):
             self.triple_loss = get_loss_func(phs, prs, pts, nhs, nrs, nts, self.args)
             self.triple_optimizer = generate_optimizer(self.triple_loss, self.args.learning_rate,
-                                                       opt=self.args.optimizer)
+                                                        opt=self.args.optimizer)
 
     def _define_mapping_variables(self):
         add_mapping_variables(self)
@@ -115,7 +115,6 @@ class BasicModel:
     def _eval_valid_embeddings(self):
         if len(self.kgs.valid_links) > 0:
             embeds1 = tf.nn.embedding_lookup(self.ent_embeds, self.kgs.valid_entities1).eval(session=self.session)
-            #embeds2 = tf.nn.embedding_lookup(self.ent_embeds, self.kgs.valid_entities2 + self.kgs.test_entities2).eval(
             embeds2 = tf.nn.embedding_lookup(self.ent_embeds, self.kgs.valid_entities2).eval(session=self.session)
         else:
             embeds1 = tf.nn.embedding_lookup(self.ent_embeds, self.kgs.test_entities1).eval(session=self.session)
@@ -133,13 +132,13 @@ class BasicModel:
         self.launch_ptranse_test_relation_types(kg_test)
 
 
-    def valid(self, stop_metric):
+    def valid_alignment(self, stop_metric):
         embeds1, embeds2, mapping = self._eval_valid_embeddings()
         mr, mrr, hits, hits_12_list, hits_21_list  = rank_alignment_bidirection(embeds1, embeds2, mapping, self.args.top_k, self.args.test_threads_num,
                             metric=self.args.eval_metric, normalize=self.args.eval_norm, csls_k=0, accurate=True)
         return  mr, mrr, hits, hits_12_list, hits_21_list 
 
-    def test(self, save=True):
+    def test_alignment(self, save=True):
         embeds1, embeds2, mapping = self._eval_test_embeddings()
 
         mr, mrr, hits, hits_12_list, hits_21_list  = rank_alignment_bidirection(embeds1, embeds2, mapping, self.args.top_k, self.args.test_threads_num,
@@ -290,9 +289,10 @@ class BasicModel:
                 gc.collect()
         print("Training ends. Total time = {:.3f} s.".format(time.time() - t))
 
-    def reload_model(self, checkpoint_dir=None):
+    def reload_model(self, saver=None, checkpoint_dir=None):
         #saver = tf.train.import_meta_graph(self.args.model_meta_path)
-        saver = tf.compat.v1.train.Saver()
+        if saver is None:
+            saver = tf.compat.v1.train.Saver()
         if checkpoint_dir is None:
             checkpoint_dir = self.args.checkpoint_dir
         saver.restore(self.session, tf.train.latest_checkpoint(checkpoint_dir))

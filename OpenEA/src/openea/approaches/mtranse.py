@@ -64,14 +64,14 @@ class MTransE(BasicModel):
         start = time.time()
         for steps_task in steps_tasks:
             mp.Process(target=bat.generate_pos_batch_queue,
-                       args=(self.kgs.kg1.relation_triples_list, self.kgs.kg2.relation_triples_list,
-                             self.args.batch_size, steps_task, batch_queue)).start()
+                        args=(self.kgs.kg1.relation_triples_list, self.kgs.kg2.relation_triples_list,
+                            elf.args.batch_size, steps_task, batch_queue)).start()
         epoch_loss = 0
         trained_samples_num = 0
         for i in range(triple_steps):
             batch_pos = batch_queue.get()
             batch_loss, _ = self.session.run(fetches=[self.triple_loss, self.triple_optimizer],
-                                             feed_dict={self.pos_hs: [x[0] for x in batch_pos],
+                                            feed_dict={self.pos_hs: [x[0] for x in batch_pos],
                                                         self.pos_rs: [x[1] for x in batch_pos],
                                                         self.pos_ts: [x[2] for x in batch_pos]})
             trained_samples_num += len(batch_pos)
@@ -88,7 +88,7 @@ class MTransE(BasicModel):
         for i in range(triple_steps):
             links_batch = random.sample(self.kgs.train_links, len(self.kgs.train_links) // triple_steps)
             batch_loss, _ = self.session.run(fetches=[self.mapping_loss, self.mapping_optimizer],
-                                             feed_dict={self.seed_entities1: [x[0] for x in links_batch],
+                                            feed_dict={self.seed_entities1: [x[0] for x in links_batch],
                                                         self.seed_entities2: [x[1] for x in links_batch]})
             epoch_loss += batch_loss
             trained_samples_num += len(links_batch)

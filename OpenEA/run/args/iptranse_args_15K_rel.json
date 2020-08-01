@@ -7,19 +7,22 @@
 	"search_module": "greedy",
 
     "dim": 100,
-    "rel_hidden_dim": 200,
+	"rel_hidden_dim": 200,
     "init": "normal",
 	"ent_l2_norm": true,
 	"rel_l2_norm": true,
 	"loss_norm": "L2",
 
-	"learning_rate": 0.01,
+	"learning_rate": 0.1,
+	"learning_rate_rel": 0.01,
+	"l2_penalty":0.0000,
     "optimizer": "Adagrad",
-	"max_epoch":1500,
+	"max_epoch":4000,
 	"batch_size": 5000,
 
 	"margin": 1.5,
 	"path_parm": 0.1,
+	"alpha": 5,
 
     "neg_sampling": "uniform",
 	"neg_triple_num": 1,
@@ -28,11 +31,11 @@
 	"test_threads_num": 4,
 
 	"ordered": true,
-	"start_valid": 10,
+	"start_valid": 500,
 	"max_epoch_rel": 500,
 	"eval_freq": 10,
 	"train_rel_freq":20,
-	"stop_metric": "hits1", 
+	"stop_metric": "max_epoch", 
 	"eval_metric": "inner",
 	"early_stop_patience":3,
 	"csls":10,
@@ -43,11 +46,15 @@
 	"bp_freq": 100,
 	"beta1":1,
 	"beta2":1,
-	"rel_inp_dropout":0.2,
-	"rel_hid_dropout":0.1,
+	"rel_inp_dropout":0.4,
+	"rel_hid_dropout":0.4,
 	"predict_relation":true,
 	"train_kg": "kg2",
 	"alignment_module": "sharing",
+	"train_module": "synchronous",
 	"load_pretrain_emb": false,
-	"mode":"train"
+	"load_pretrain_model": false,
+	"eval_each_relation":false,
+	"mode":"train",
+	"test_merged_emb":false
 }

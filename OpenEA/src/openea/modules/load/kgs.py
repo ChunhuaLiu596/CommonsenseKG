@@ -112,8 +112,10 @@ class KGs:
             else:
                 ent_ids1, ent_ids2 = generate_mapping_id(kg1_useful_triples_set, kg1_useful_entities_set,
                                         kg2_useful_triples_set, kg2_useful_entities_set, ordered=ordered)
-                rel_ids1, rel_ids2 = generate_mapping_id(kg1_useful_triples_set, kg1_useful_relations_set,
-                                        kg2_useful_triples_set, kg2_useful_relations_set, ordered=False)
+                #rel_ids1, rel_ids2 = generate_mapping_id(kg1_useful_triples_set, kg1_useful_relations_set,
+                #                        kg2_useful_triples_set, kg2_useful_relations_set, ordered=False)
+                rel_ids1, rel_ids2 = generate_sharing_id(rel_links, kg1_useful_triples_set, kg1_useful_relations_set, # share relations anyway
+                                                        kg2_useful_triples_set, kg2_useful_relations_set, ordered=False)
 
             print("Relations and ids: {} {} ".format(rel_ids1, rel_ids2))
 

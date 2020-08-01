@@ -2,12 +2,13 @@
 
 #------------------
 echo "#Creating alignment set"
-conceptnet_source_file='./data/cn100k/cn100k_train_valid_test.txt'
+#conceptnet_source_file='./data/cn100k/cn100k_train_valid_test.txt'
+conceptnet_source_file='./data/ConceptNet5.7/conceptnet5.7_triple_all'
 swow_source_file='data/swow/SWOW-EN.R100.csv'
 swow_filter_file='./data/swow/swow_triple_freq2.filter'
 
 #<<'COMMENT'
-output_folder=./data/alignment/C_S_V0.1
+output_folder=./data/alignment/C_S_V0.2
 
 if [ ! -d "$output_folder" ]; then
     echo "Creating $output_folder"

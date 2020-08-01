@@ -230,7 +230,7 @@ def plot_confusion_matrix_from_data(y_test, predictions, columns=None, annot=Tru
     lw=0.2
     y_test_column = set(y_test)
     pred_column = set(predictions)
-    print("columns {}, confm shape {}".format(len(columns), confm.shape))
+    #print("columns {}, confm shape {}".format(len(columns), confm.shape))
     print( "y_test: {}, total_classes: {}\npredictions: {}, total_classes: {}".format(y_test_column,len(y_test_column),  pred_column, len(pred_column)))
     #assert len(y_test_column) == len(columns) , "y_test: {}, total_classes: {}\n predictions: {}, total_classes: {}".format(y_test_column,len(y_test_column),  pred_column, len(pred_column))
     #if len(columns)

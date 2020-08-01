@@ -11,18 +11,19 @@ from openea.modules.utils.util import task_divide, merge_dic
 import openea.modules.load.read as rd
 
 
-def calculate_rank_bidirection(gold_hrt, pred_tails, pred_heads, top_k, hr_to_multi_t, tr_to_multi_h, filter_rank=True):
+def calculate_rank_bidirection(gold_hrt, pred_tails, pred_heads, top_k, hr_to_multi_t, tr_to_multi_h, filter_rank=True, suffix='valid'):
     mr_12, mrr_12, hits_12, hits_12_list = calculate_rank(gold_hrt, pred_tails, top_k, hr_to_multi_t, 'hr->t', filter_rank)
-    mr_12, mrr_21, hits_21, hits_21_list= calculate_rank(gold_hrt, pred_heads, top_k, tr_to_multi_h, 'h<-rt', filter_rank)
+    mr_21, mrr_21, hits_21, hits_21_list= calculate_rank(gold_hrt, pred_heads, top_k, tr_to_multi_h, 'h<-rt', filter_rank)
 
-    mr = round((mr_12 + mr_12)/2, 4)
+    mr = round((mr_12 + mr_21)/2, 4)
     mrr = round((mrr_12+ mrr_21)/2, 4)
     hits = ((hits_12 + hits_21)/2).tolist() 
     for i in range(len(hits)):
         hits[i] = round(hits[i], 4)
     hits=np.array(hits)
-    #print("mr_12:{}, mrr_12:{}, hits_12:{}".format(mr_12, mrr_12, hits_12))
-    #print("mr_12:{}, mrr_21:{}, hits_21:{}".format(mr_12, mrr_21, hits_21))
+    if "test1" in suffix or "test2" in suffix:
+        print("mr_12:{}, mrr_12:{}, hits_12:{}".format(mr_12, mrr_12, hits_12))
+        print("mr_21:{}, mrr_21:{}, hits_21:{}".format(mr_21, mrr_21, hits_21))
     return mr, mrr, hits, hits_12_list, hits_21_list
 
 
@@ -99,9 +100,11 @@ def pairs_id2ent(inp_pairs, id1_entities, id2_entities):
         out_pairs.append((ent1, ent2s))
     return out_pairs
 
-def write_rank_to_file(kg_eval, t_pred, h_pred, id_entities_dict, out_folder, suffix):
+def write_rank_to_file(kg_eval, t_pred, h_pred, id_entities_dict, out_folder, suffix, pos_triples=None):
 
-    pos_triples = kg_eval.relation_triples_list 
+    if pos_triples is None:
+        pos_triples = kg_eval.relation_triples_list 
+
     id2ent= kg_eval.id_entities_dict
     id2rel = kg_eval.id_relations_dict
 
@@ -130,6 +133,7 @@ def write_rank_to_file(kg_eval, t_pred, h_pred, id_entities_dict, out_folder, su
     write2csv(h_lines, file_h)
     print("save {}\nsave {}".format(file_t, file_h))
 
+
 def write2csv(result, file_name):
     COLUMNS = ["gold_triples"]
     for i in range(1,11):
@@ -137,5 +141,3 @@ def write2csv(result, file_name):
         COLUMNS.append("score-{}".format(i))
     df=pd.DataFrame(result, columns=COLUMNS)
     df.to_csv(file_name, index=True)
-
-

@@ -76,24 +76,36 @@ class IPTransE(BasicModel):
         self._define_variables()
         if self.args.predict_relation:
             self._define_rel_graph()
+
+        if self.args.alignment_module=="mapping": 
+            self._define_mapping_variables()
+
+        if self.args.alignment_module=="mapping": 
+            self._define_mapping_graph()
+
         self._define_embed_graph()
         self._define_eval_graph()
         #self._define_alignment_graph()
 
+        self.saver = tf.compat.v1.train.Saver()
         if self.args.mode=="train":
             self._define_summary_writers()
             tf.compat.v1.global_variables_initializer().run(session=self.session)
-            self.saver = tf.compat.v1.train.Saver()
             self.checkpoint_dir =  "{}model/".format(self.out_folder)
-            self.save_path = self.saver.save(self.session, "{}model.ckpt".format(self.checkpoint_dir))
-        #if self.args.load_pretrain_model:
-        #    self.reload_model()
+            self.save_path = "{}model.ckpt".format(self.checkpoint_dir)
+        
+        if self.args.load_pretrain_model:
+            self.checkpoint_dir= self.args.checkpoint_dir
+            if not os.path.exists(self.out_folder):
+                os.makedirs(self.out_folder)
+            #self.reload_model()
 
         # customize parameters
         #if self.args.train_kg=="kg12":
         #    assert self.args.alignment_module == 'sharing'
         if self.args.train_kg=="kg1" or self.args.train_kg=="kg2":
             assert self.args.alignment_module != 'sharing'
+
         assert self.args.init == 'normal'
         assert self.args.neg_sampling == 'uniform'
         assert self.args.optimizer == 'Adagrad'
@@ -180,13 +192,15 @@ class IPTransE(BasicModel):
 
     def _generate_rel_cross_entropy_loss(self, preds, labels):
         """Softmax cross-entropy loss for relations."""
-        loss = - tf.reduce_sum(labels*tf.log(preds + 1e-9),1)
+        preds = tf.cast(preds, tf.float32)
+        loss = - tf.reduce_sum(labels*tf.log(preds + 1e-9), 1)
         return tf.reduce_sum(loss, name="cross_entropy_loss")
         #loss = tf.nn.softmax_cross_entropy_with_logits(logits=logits, labels=labels)
         #return tf.reduce_sum(loss, name="cross_entropy_loss")
 
     def _generate_rel_entropy_loss(self, preds):
         '''preds: normalized logits'''
+        preds = tf.cast(preds, tf.float32)
         loss = - tf.reduce_sum(preds*tf.log(preds + 1e-9),1)
         return tf.reduce_sum(loss, name="entropy_loss")
 
@@ -199,10 +213,10 @@ class IPTransE(BasicModel):
         with tf.compat.v1.variable_scope(tf.get_variable_scope(), reuse=tf.AUTO_REUSE):
             with tf.compat.v1.variable_scope("train_rel_types", reuse=tf.AUTO_REUSE):
 
-                inp = tf.concat([hs, ts], -1)
+                inp = tf.concat([hs, ts, hs*ts, hs-ts], -1)
                 if training:
                     inp = tf.nn.dropout(inp, keep_prob=1-inp_dropout)
-                hidden1 = tf.layers.dense(inputs=inp, units= self.args.rel_hidden_dim,
+                hidden1 = tf.layers.dense(inputs=inp, units= self.args.rel_hidden_dim*1.5,
                                         activation=tf.nn.relu,
                                         kernel_initializer=tf.contrib.layers.xavier_initializer(uniform=False),
                                         kernel_regularizer='l2',
@@ -211,26 +225,27 @@ class IPTransE(BasicModel):
                 if training:
                     hidden1 = tf.nn.dropout(hidden1, keep_prob=1-hid_dropout)
 
-                hidden2 = tf.layers.dense(inputs=hidden1, units= self.args.rel_hidden_dim,
+                hidden2 = tf.layers.dense(inputs=hidden1, units= self.args.rel_hidden_dim*1.5/2,
                                         activation=tf.nn.relu,
                                         kernel_initializer=tf.contrib.layers.xavier_initializer(uniform=False),
                                         kernel_regularizer='l2',
                                         reuse=tf.AUTO_REUSE, name='w_rel_hidden2')
+                if training:
+                    hidden2 = tf.nn.dropout(hidden2, keep_prob=1-hid_dropout)
 
                 logits = tf.layers.dense(inputs=hidden2, units=self.kgs.relations_mask_num,
                                         activation=tf.nn.relu,
                                         kernel_initializer=tf.contrib.layers.xavier_initializer(uniform=False),
                                         kernel_regularizer='l2',
                                         reuse=tf.AUTO_REUSE, name="w_rel_output")
-
-                logits = logits - tf.reduce_max(logits, axis=1, keepdims=True)
-                logits_normalized = tf.nn.softmax(logits, name='rel_logits')
-                rs = tf.matmul(logits_normalized, self.kg1_rel_embeds) #(b, 34) (34, d)
-        return  rs, logits_normalized
+                pos_rs_pred = tf.nn.softmax(logits, name='rel_logits')
+                #logits = logits - tf.reduce_max(logits, axis=1, keepdims=True)
+                prs_pred = tf.matmul(pos_rs_pred, self.kg1_rel_embeds) #(b, 34) (34, d)
+        return  pos_rs_pred, prs_pred
 
     def _define_pos_rs(self, phs, pts, pos_rs, pos_rs_mask, inp_dropout=0, hid_dropout=0, training=False):
         '''pos_rs_pres is the unnormalized relation type distribution'''
-        prs_pred, pos_rs_pred = self._define_rel_emb(phs, pts, inp_dropout, hid_dropout, training)
+        pos_rs_pred, prs_pred = self._define_rel_emb(phs, pts, inp_dropout, hid_dropout, training)
         pos_rs_pred_cn = tf.boolean_mask(pos_rs_pred, pos_rs_mask)
         pos_rs_label_cn = tf.boolean_mask(pos_rs, pos_rs_mask)
         pos_rs_label_cn = tf.one_hot(pos_rs_label_cn, self.kgs.relations_mask_num)
@@ -248,20 +263,21 @@ class IPTransE(BasicModel):
                 #nrs = tf.nn.embedding_lookup(self.rel_embeds, self.neg_rs)
             else:
                 prs, _, _, _ = self._define_pos_rs(phs, pts, self.pos_rs, self.pos_rs_mask, self.args.rel_inp_dropout, self.args.rel_hid_dropout, True)
-
+                #prs = tf.nn.embedding_lookup(self.rel_embeds, self.pos_rs)
             nrs = prs
             self.triple_loss= self._generate_transe_loss(phs, prs, pts, nhs, nrs, nts)
-            tf.compat.v1.summary.scalar("triple_loss", self.triple_loss)
-            self._add_summary(training=True)
+            #tf.compat.v1.summary.scalar("triple_loss", self.triple_loss)
 
             if self.args.mode=="train":
+                self._add_summary(training=True)
                 self.var_list_emb = tf.compat.v1.get_collection(tf.compat.v1.GraphKeys.TRAINABLE_VARIABLES, scope="embeddings")
                 for op in self.var_list_emb:
-                    print("updating: {}".format(op.name))
+                    print("triple loss update: {}".format(op.name))
 
                 learning_rate = tf.compat.v1.train.exponential_decay(self.args.learning_rate, self.global_step_triple,
                                                                     10000, 0.96, staircase=True)
                 self.optimizer = generate_optimizer(self.triple_loss, learning_rate, var_list=self.var_list_emb, opt=self.args.optimizer)
+                #self.optimizer = generate_optimizer(self.triple_loss, learning_rate, opt=self.args.optimizer)
 
     def _define_rel_graph(self):
         with tf.name_scope("train-rel"):
@@ -271,12 +287,24 @@ class IPTransE(BasicModel):
             nhs = tf.nn.embedding_lookup(self.ent_embeds, self.neg_hs)
             nts = tf.nn.embedding_lookup(self.ent_embeds, self.neg_ts)
 
-            _, pos_rs_pred_cn, pos_rs_label_cn, pos_rs_pred = self._define_pos_rs(phs, pts, self.pos_rs, self.pos_rs_mask, self.args.rel_inp_dropout, self.args.rel_hid_dropout, True)
+            prs_pred, pos_rs_pred_cn, pos_rs_label_cn, pos_rs_pred = self._define_pos_rs(phs, pts, self.pos_rs, 
+                                                self.pos_rs_mask, self.args.rel_inp_dropout, self.args.rel_hid_dropout, True)
 
             self.rel_cross_entropy_loss = self.beta1 * self._generate_rel_cross_entropy_loss(pos_rs_pred_cn, pos_rs_label_cn)
             self.rel_entropy_loss = self.beta2 * self._generate_rel_entropy_loss(pos_rs_pred)
 
-            self.train_loss_rel = self.rel_cross_entropy_loss +  self.rel_entropy_loss
+            #rel_l2_loss=0
+            #for var in tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES, scope="train_rel_types"):
+            #    if 'kernel' in var.name:
+            #        print("regularizing:{}".format(var.name))
+            #        rel_l2_loss += self.args.l2_penalty*tf.nn.l2_loss(var)
+            #self.rel_l2_loss = rel_l2_loss
+
+            if self.args.train_module=="asynchronous1":
+                self.train_loss_rel = self.rel_cross_entropy_loss +  self.rel_entropy_loss 
+            elif self.args.train_module=="asynchronous2" or self.args.train_module=="synchronous":
+                self.triple_loss_1 = self._generate_transe_loss(phs, prs_pred, pts, nhs, prs_pred, nts)
+                self.train_loss_rel = self.rel_cross_entropy_loss +  self.rel_entropy_loss + self.triple_loss_1
 
             self.rel_acc = self._generate_rel_acc(pos_rs_pred_cn, pos_rs_label_cn)
 
@@ -288,31 +316,45 @@ class IPTransE(BasicModel):
             self.logits = pos_rs_pred
 
             if self.args.mode=="train":
-                self.var_list_rel = tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES, scope="train_rel_types")
-                for op in self.var_list_rel:
-                    print("updating: {}".format(op.name))
+                #self.var_list_rel = tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES, scope="train_rel_types")
+                #for op in self.var_list_rel:
+                #    print("rel loss update: {}".format(op.name))
 
-                learning_rate = tf.compat.v1.train.exponential_decay(self.args.learning_rate, self.global_step_rel,
-                                                                    5000, 0.96, staircase=True)
-                self.rel_optimizer = generate_optimizer(self.train_loss_rel, learning_rate, var_list=self.var_list_rel, opt=self.args.optimizer)
+                learning_rate = tf.compat.v1.train.exponential_decay(self.args.learning_rate_rel, self.global_step_rel,
+                                                                    10000, 0.96, staircase=True)
+                                                                    #5000, 0.96, staircase=True)
+                #self.rel_optimizer = generate_optimizer(self.train_loss_rel, learning_rate, var_list=self.var_list_rel, opt=self.args.optimizer)
+                self.rel_optimizer = generate_optimizer(self.train_loss_rel, learning_rate, opt=self.args.optimizer)
 
     def _add_summary(self, training=True, metrics=None):
         if training:
-            train_sum_lt = tf.compat.v1.summary.scalar("triple_loss", self.triple_loss)
             if self.args.predict_relation:
                 train_sum_ra = tf.compat.v1.summary.scalar("rel_acc", self.rel_acc)
                 train_sum_lp = tf.compat.v1.summary.scalar("rel_entropy_loss", self.rel_entropy_loss)
                 train_sum_lr =tf.compat.v1.summary.scalar("rel_cross_entropy_loss", self.rel_cross_entropy_loss)
+                #train_sum_l2 =tf.compat.v1.summary.scalar("rel_l2_loss", self.rel_l2_loss)
+                train_summaries= [train_sum_ra, train_sum_lr, train_sum_lp]
 
-                self.train_merged = tf.compat.v1.summary.merge([train_sum_lt, train_sum_ra,train_sum_lr, train_sum_lp])
+                if self.args.train_module=="synchronous":
+                    train_sum_lt_1 =tf.compat.v1.summary.scalar("triple_loss_1", self.triple_loss_1)
+                    train_summaries.append(train_sum_lt_1)
+                elif self.args.train_module=="asynchronous1":
+                    train_sum_lt = tf.compat.v1.summary.scalar("triple_loss", self.triple_loss)
+                    train_summaries.append(train_sum_lt)
+                elif self.args.train_module=="asynchronous2":
+                    train_sum_lt = tf.compat.v1.summary.scalar("triple_loss", self.triple_loss)
+                    train_sum_lt_1 =tf.compat.v1.summary.scalar("triple_loss_1", self.triple_loss_1)
+                    train_summaries.extend([train_sum_lt, train_sum_lt_1])
             else:
-                self.train_merged = tf.compat.v1.summary.merge([train_sum_lt])
+                train_sum_lt = tf.compat.v1.summary.scalar("triple_loss", self.triple_loss)
+                train_summaries=[train_sum_lt]
+
+            self.train_merged = tf.compat.v1.summary.merge(train_summaries)
         else:
             if self.args.predict_relation:
                 valid_sum_ra =tf.compat.v1.summary.scalar("rel_acc", self.eval_rel_acc)
                 valid_sum_lp = tf.compat.v1.summary.scalar("rel_entropy_loss", self.eval_rel_entropy_loss)
                 valid_sum_lr =tf.compat.v1.summary.scalar("rel_cross_entropy_loss", self.eval_rel_cross_entropy_loss)
-                #if self.args.mode=="train":
                 self.valid_merged = tf.compat.v1.summary.merge([valid_sum_ra, valid_sum_lr, valid_sum_lp, self.sum_rel])
                                                     #self.sum_ent, self.sum_rel])
     def _add_metrics_summary(self, metrics, writer, epoch):
@@ -338,7 +380,9 @@ class IPTransE(BasicModel):
                 self._define_eval_triple_loss(phs, prs, pts)
 
             self._define_eval_completion(phs, prs, pts, candidates)
-            self._add_summary(training=False)
+
+            if self.args.mode=="train":
+                self._add_summary(training=False)
 
     def _define_eval_completion(self, phs, prs, pts, candidates):
         with tf.name_scope('link'):
@@ -353,19 +397,16 @@ class IPTransE(BasicModel):
         '''evaluate relation accuracy for positive triples'''
         #assert self.args.predict_relation
         start = time.time()
-        prs, prs_pred_cn, prs_label_cn, prs_pred = self._define_pos_rs(phs, pts, prs_label, prs_mask)
+        prs_pred, pos_rs_pred_cn, pos_rs_label_cn, pos_rs_pred = self._define_pos_rs(phs, pts, prs_label, prs_mask)
 
-        self.eval_rel_acc = self._generate_rel_acc(prs_pred_cn, prs_label_cn)
+        self.eval_rel_acc = self._generate_rel_acc(pos_rs_pred_cn, pos_rs_label_cn)
         with tf.name_scope("eval_rel_losses"):
-            self.eval_rel_cross_entropy_loss = self.beta1 * self._generate_rel_cross_entropy_loss(prs_pred_cn, prs_label_cn)
-            self.eval_rel_entropy_loss = self.args.beta2 * self._generate_rel_entropy_loss(prs_pred)
-
-            #self.relation_pred = tf.argmax(tf.nn.softmax(prs_pred_cn), 1)
-            #self.relation_pred = tf.argmax(prs_pred_cn, 1)
-            #self.relation_label  = tf.argmax(prs_label_cn, 1)
-            self.relation_pred = prs_pred_cn
-            self.relation_label  = prs_label_cn
-        return prs
+            self.eval_rel_cross_entropy_loss = self.beta1 * self._generate_rel_cross_entropy_loss(pos_rs_pred_cn, pos_rs_label_cn)
+            self.eval_rel_entropy_loss = self.args.beta2 * self._generate_rel_entropy_loss(pos_rs_pred)
+            
+            self.relation_pred = pos_rs_pred_cn
+            self.relation_label  = pos_rs_label_cn
+        return prs_pred
 
     def _define_eval_triple_loss(self, phs, prs, pts):
         with tf.name_scope("eval_rel_losses"):
@@ -480,12 +521,30 @@ class IPTransE(BasicModel):
             #self.detect_nan(vals)
         self.writer_train.add_summary(vals["summary"], epoch)
         self.writer_train.flush()
-        #self._print_epoch_vals(epoch_vals, epoch, triple_steps, start)
-        if self.kgs.kg1 is not None:
-            random.shuffle(self.kgs.kg1.relation_triples_list)
-        if self.kgs.kg2 is not None:
-            random.shuffle(self.kgs.kg2.relation_triples_list)
+        if self.args.predict_relation and self.args.train_module=='synchronous':
+            self._print_epoch_vals(epoch_vals, epoch, triple_steps, start)
+        #if self.kgs.kg1 is not None:
+        #    random.shuffle(self.kgs.kg1.relation_triples_list)
+        #if self.kgs.kg2 is not None:
+        #    random.shuffle(self.kgs.kg2.relation_triples_list)
         self.check_norm()
+
+    def launch_mapping_training_1epo(self, epoch, triple_steps, writer):
+        start = time.time()
+        epoch_loss = 0
+        trained_samples_num = 0
+        for i in range(triple_steps):
+            links_batch = random.sample(self.kgs.train_links, len(self.kgs.train_links) // triple_steps)
+            batch_loss, _ = self.session.run(fetches=[self.mapping_loss, self.mapping_optimizer],
+                                            feed_dict={self.seed_entities1: [x[0] for x in links_batch],
+                                                        self.seed_entities2: [x[1] for x in links_batch]})
+            writer.add_summary(tf.compat.v1.Summary(value=[tf.compat.v1.Summary.Value(tag='train-triple/'+'mapping_loss', simple_value=batch_loss), ]), epoch)
+            #train_sum_lm =tf.compat.v1.summary.scalar("mapping_loss", self.mapping_loss)
+            epoch_loss += batch_loss
+            trained_samples_num += len(links_batch)
+        epoch_loss /= trained_samples_num
+        print('epoch {}, avg. mapping loss: {:.4f}, cost time: {:.4f}s'.format(epoch, epoch_loss, time.time() - start))
+
 
     def _print_epoch_vals(self, epoch_vals, epoch, triple_steps, start):
         triple_loss = 0
@@ -508,21 +567,32 @@ class IPTransE(BasicModel):
 
             print('epoch {}, avg. triple_loss: {:.4f}, rel_cross_entropy_loss: {:.4f}, rel_entropy_loss: {:.4f}, rel_acc: {:.4f}, cost time: {:.4f}s'.format(epoch, triple_loss, rel_cross_entropy_loss, rel_entropy_loss ,rel_acc, time.time() - start))
 
-    def launch_ptranse_evaluation(self, kg_eval, writer, type='valid', epoch=None, draw_confm=False, save=False):
+    def launch_ptranse_evaluation(self, epoch):
+        if self.args.train_kg=="kg1":
+            print("Evalute on kg1_valid")
+            flag = self.launch_ptranse_evaluate_completion(self.kgs.kg1_valid, self.writer_valid1, 'valid', epoch)
 
-        if self.args.train_kg=="kg12":
-            flag1 = self.launch_ptranse_evaluate_completion(kg_eval, writer, type, epoch, draw_confm, save)
-            flag2 = self.launch_ptranse_evaluate_alignment(kg_eval, writer, type, epoch, save)
-            return 0.5*(flag1 + flag2)
-        else:
-            flag1 = self.launch_ptranse_evaluate_completion(kg_eval, writer, type, epoch, draw_confm, save)
-            return flag1
+        elif self.args.train_kg=="kg2":
+            print("\nEvalute on kg2_valid")
+            flag = self.launch_ptranse_evaluate_completion(self.kgs.kg2_valid, self.writer_valid2, 'valid', epoch)
 
-    def launch_ptranse_evaluate_alignment(self, kg_eval, writer, type='valid', epoch=None, save=False):
+        elif self.args.train_kg=="kg12":
+            print("Evalute on kg1_valid")
+            flag_kg1 = self.launch_ptranse_evaluate_completion(self.kgs.kg1_valid, self.writer_valid1, 'valid', epoch)
+            print("\nEvalute on kg2_valid")
+            flag_kg2 = self.launch_ptranse_evaluate_completion(self.kgs.kg2_valid, self.writer_valid2, 'valid', epoch)
+
+            print("\nEvalute on alignment")
+            flag_align = self.launch_ptranse_evaluate_alignment(self.writer_valid1, 'valid', epoch)
+            flag = (flag_kg1 + flag_kg2 + flag_align)/3.0
+
+        return flag
+
+    def launch_ptranse_evaluate_alignment(self, writer, type='valid', epoch=None, save=False):
         if type=='valid':
-            mr, mrr, hits, _, _ = self.valid(self.args.stop_metric)
+            mr, mrr, hits, _, _ = self.valid_alignment(self.args.stop_metric)
         elif type=='test':
-            mr, mrr, hits, _, _ = self.test(save)
+            mr, mrr, hits, _, _ = self.test_alignment(save)
 
         if epoch is not None:
             with tf.name_scope("alignment_metrics"):
@@ -556,6 +626,7 @@ class IPTransE(BasicModel):
                 })
 
         pos_triples = kg_eval.relation_triples_list
+
         pos_hs = [x[0] for x in pos_triples]
         pos_rs = [x[1] for x in pos_triples]
         pos_ts = [x[2] for x in pos_triples]
@@ -568,11 +639,8 @@ class IPTransE(BasicModel):
                     self.eval_candidates: kg_eval.entities_list,
                     }
         vals = self.session.run(fetches=fetches, feed_dict=feed_dict)
-        loss =0
-        if self.args.predict_relation:
-            rel_acc = vals["rel_acc"]
 
-        mr, mrr, hits, hits_12_list, hits_21_list = calculate_rank_bidirection(kg_eval.local_relation_triples_list, vals["distance_t_pred"], vals["distance_h_pred"], self.args.top_k, kg_eval.local_hr_to_multi_t, kg_eval.local_tr_to_multi_h)
+        mr, mrr, hits, hits_12_list, hits_21_list = calculate_rank_bidirection(kg_eval.local_relation_triples_list, vals["distance_t_pred"], vals["distance_h_pred"], self.args.top_k, kg_eval.local_hr_to_multi_t, kg_eval.local_tr_to_multi_h, type)
 
         if epoch is not None :
             if self.args.predict_relation:
@@ -584,22 +652,23 @@ class IPTransE(BasicModel):
             writer.flush()
 
         if self.args.predict_relation:
+            rel_acc = vals["rel_acc"]
             print("relation results: valid_rel_acc = {:.4f}, triples: {} ".format(rel_acc, triples_num))
-            if draw_confm:
-                rel_ids = sorted(set( np.argmax(vals["relation_pred"], 1)) | set(np.argmax(vals["relation_label"], 1)))
-                rel_classes = kg_eval.get_rel_classes(rel_ids, self.kgs.relations_classes)
-                plot_confusion_matrix_from_data(np.argmax(vals["relation_label"],1), np.argmax(vals["relation_pred"],1), columns= rel_classes,fz=14, figsize=[len(rel_classes)+1, len(rel_classes)+1], show_null_values=0, save_name= self.out_folder+'test_confusion_matrix.png')
-
         print("completion results: hits@{} = {}, mr = {:.4f}, mrr = {:.4f}, rank_candidates: {}, time = {:.3f} s. ".
                 format(self.args.top_k, hits, mr, mrr, entities_num, time.time() - start))
+
+        if self.args.predict_relation and draw_confm:
+                rel_ids = sorted(set( np.argmax(vals["relation_pred"], 1)) | set(np.argmax(vals["relation_label"], 1)))
+                rel_classes = kg_eval.get_rel_classes(rel_ids, self.kgs.relations_classes)
+                plot_confusion_matrix_from_data(np.argmax(vals["relation_label"],1), np.argmax(vals["relation_pred"],1), columns= rel_classes,fz=14, figsize=[len(rel_classes)+1, len(rel_classes)+1], show_null_values=0, save_name= self.out_folder+'{}_confusion_matrix.png'.format(type))
 
         if save:
             write_rank_to_file(kg_eval, hits_12_list, hits_21_list, kg_eval.local_id_entities_dict,
                                 out_folder=self.out_folder, suffix=type)
             if self.args.predict_relation:
-                rd.write_rel_score_to_file(vals["relation_label"], vals["relation_pred"], self.out_folder)
+                #rd.write_rel_score_to_file(vals["relation_label"], vals["relation_pred"], self.out_folder)
+                rd.write_rel_score_to_file(kg_eval, vals["relation_label"], vals["relation_pred"], self.out_folder, type)
 
-        #if type=='valid':
         flag = hits[0] if self.args.stop_metric == 'hits1' else mrr
         return flag
 
@@ -617,59 +686,165 @@ class IPTransE(BasicModel):
         manager = mp.Manager()
         training_batch_queue = manager.Queue()
 
-        for epoch in range(1, self.args.max_epoch):
-            if self.args.predict_relation:
-                if epoch < self.args.max_epoch_rel:
-                    self.launch_rel_training_1epo(epoch, triple_steps, steps_tasks, training_batch_queue)
-                elif epoch % self.args.train_rel_freq ==0:
-                    self.launch_rel_training_1epo(epoch, triple_steps, steps_tasks, training_batch_queue)
+        for epoch in range(1, self.args.max_epoch+1):
+            #if epoch < self.args.max_epoch_rel:
+            #        self.launch_rel_training_1epo(epoch, triple_steps, steps_tasks, training_batch_queue)
 
-            self.launch_triple_training_1epo(epoch, triple_steps, steps_tasks, training_batch_queue)
+            if self.args.predict_relation:
+                if self.args.train_module=="synchronous":
+                    self.launch_rel_training_1epo(epoch, triple_steps, steps_tasks, training_batch_queue)
+                elif self.args.train_module=="asynchronous1" or self.args.train_module=="asynchronous2":
+                    if epoch % self.args.train_rel_freq ==0:
+                        self.launch_rel_training_1epo(epoch, triple_steps, steps_tasks, training_batch_queue)
+                    else:
+                        self.launch_triple_training_1epo(epoch, triple_steps, steps_tasks, training_batch_queue)
+            else:
+                self.launch_triple_training_1epo(epoch, triple_steps, steps_tasks, training_batch_queue)
+
+            if self.args.alignment_module=="mapping":
+                self.launch_mapping_training_1epo(epoch, triple_steps, self.writer_train)
 
             if epoch % self.args.eval_freq == 0:
-                if self.args.train_kg=="kg1":
-                    print("Evalute on kg1_valid")
-                    flag = self.launch_ptranse_evaluation(self.kgs.kg1_valid, writer=self.writer_valid1, type='valid',epoch=epoch)
-                elif self.args.train_kg=="kg2":
-                    print("\nEvalute on kg2_valid")
-                    flag = self.launch_ptranse_evaluation(self.kgs.kg2_valid, writer=self.writer_valid2, type='valid',epoch=epoch)
-                if self.args.train_kg=="kg12":
-                    print("Evalute on kg1_valid")
-                    flag_kg1 = self.launch_ptranse_evaluation(self.kgs.kg1_valid, writer=self.writer_valid1, type='valid',epoch=epoch)
-                    print("\nEvalute on kg2_valid")
-                    flag_kg2 = self.launch_ptranse_evaluation(self.kgs.kg2_valid, writer=self.writer_valid2, type='valid',epoch=epoch)
+                flag = self.launch_ptranse_evaluation(epoch) 
 
-                    flag = 0.5*(flag_kg1 + flag_kg2)
- 
                 self._add_metrics_summary({"stop_metric_"+self.args.stop_metric:flag}, self.writer_valid1, epoch)
-                #self.launch_ptranse_evaluation(self.kgs.kg_test,  writer=self.writer_test, type='test', epoch=epoch)
 
                 if flag> self.best_flag:
                     self.best_epoch = epoch
                     self.best_flag = flag
+                    self.saver.save(self.session, self.save_path)
                     print("Model saved in path: {}, best_epoch: {}".format(self.save_path, self.best_epoch))
 
-                if self.args.stop_metric=="max_epoch" and epoch==self.args.max_epoch:
+                if epoch==self.args.max_epoch:
                     break
-                elif (epoch - self.best_epoch)% self.args.eval_freq > self.args.early_stop_patience and epoch> self.args.start_valid:
-                    break
+
+                if self.args.stop_metric!="max_epoch":
+                    if ((epoch - self.best_epoch)/self.args.eval_freq) > self.args.early_stop_patience and epoch> self.args.start_valid:
+                        print("\n == should early stop == \n")
+                        break
 
         print("Training ends. Total time = {:.3f} s.".format(time.time() - t))
 
+
+    def eval_test(self):
         ##### Test #####
-        print("Best epoch: {}".format(self.best_epoch))
-        print("\nStart testing ...")
-        self.reload_model(self.checkpoint_dir)
-        print("Test kg1_test")
-        self.launch_ptranse_evaluation(self.kgs.kg1_test,  writer=None, type='test', epoch=None, draw_confm=True, save=True)
+        if self.args.mode=='train':
+            print("Best epoch: {}".format(self.best_epoch))
 
-        print("Test kg2_test")
-        self.launch_ptranse_evaluation(self.kgs.kg2_test,  writer=None, type='test', epoch=None, draw_confm=True, save=True)
-
-
-    def retest(self, save=True):
+        print("\nReload best model {}".format(self.checkpoint_dir))
+        self.reload_model(self.saver, self.checkpoint_dir)
         self.check_norm()
-        if self.args.train_kg=="kg12":
-            self.retest_alignment(save)
-        self.launch_ptranse_evaluate_completion(self.kgs.kg1_test, writer=None, type='test', epoch=None, draw_confm=False, save=True)
-        self.launch_ptranse_evaluate_completion(self.kgs.kg2_test, writer=None, type='test', epoch=None, draw_confm=False, save=True)
+
+        if self.args.mode=="train":
+            print("\nStart validating ...")
+            self.launch_ptranse_evaluation(epoch=self.best_epoch) 
+
+        print("\nStart testing ...")
+        if self.args.train_kg=="kg1":
+            print("Test kg1_test")
+            self.launch_ptranse_evaluate_completion(self.kgs.kg1_test, writer=None, type='test1', epoch=None, draw_confm=True, save=True)
+
+        elif self.args.train_kg=="kg2":
+            print("\nTest kg2_test")
+            self.launch_ptranse_evaluate_completion(self.kgs.kg2_test, writer=None, type='test2', epoch=None, draw_confm=True, save=True)
+
+        elif self.args.train_kg=="kg12":
+            print("Test kg1_test")
+            self.launch_ptranse_evaluate_completion(self.kgs.kg1_test, writer=None, type='test1', epoch=None, draw_confm=True, save=True)
+            print("Test kg2_test")
+            self.launch_ptranse_evaluate_completion(self.kgs.kg2_test, writer=None, type='test2', epoch=None, draw_confm=True, save=True)
+
+            print("\nTest on alignment")
+            self.test_alignment(True)
+
+
+
+
+    ############IPTransE_Evaluate ############
+    def eval_kg_each_relation(self):
+        print("\nEvaluate each relation type")
+        if self.args.train_kg=="kg1":
+            print("\nTest kg1_test")
+            self.eval_each_relation(self.kgs.kg1_test, 'test1')
+        elif self.args.train_kg=="kg2":
+            print("\nTest kg2_test")
+            self.eval_each_relation(self.kgs.kg2_test, 'test2')
+        elif self.args.train_kg=="kg12":
+            print("\nTest kg1_test")
+            self.eval_each_relation(self.kgs.kg1_test, 'test1')
+
+            print("\nTest kg2_test")
+            self.eval_each_relation(self.kgs.kg2_test, 'test2')
+
+    def eval_each_relation(self, kg_eval, type, save=True):
+        res_all = []
+        for cur_rel, triples in kg_eval.r_hrt_dict.items():
+            vals = self.get_predictions(kg_eval, cur_rel, type)
+            res = self.get_rank(kg_eval, cur_rel, vals, type, save=True)
+            res_all.append(res)
+        if save:
+            rd.write_relation_mrr_to_file(res_all, type, self.out_folder, self.args.predict_relation)
+
+
+    def get_predictions(self, kg_eval, cur_rel, type):
+        triples_num = len(kg_eval.r_hrt_dict[cur_rel])
+        entities_num = kg_eval.entities_num
+        start = time.time()
+
+        fetches={ "triple_loss": self.eval_triple_loss,
+                    "distance_t_pred":self.distance_t_pred,
+                    "distance_h_pred":self.distance_h_pred}
+
+        if self.args.predict_relation:
+            fetches.update({"rel_acc": self.eval_rel_acc,
+                    "relation_pred":self.relation_pred,
+                    "relation_label":self.relation_label,
+                })
+
+        pos_triples = kg_eval.r_hrt_dict[cur_rel]
+
+        pos_hs = [x[0] for x in pos_triples]
+        pos_rs = [x[1] for x in pos_triples]
+        pos_ts = [x[2] for x in pos_triples]
+        pos_rs_mask = [True if r_id in self.kgs.rel_ids_mask else False for r_id in pos_rs]
+
+        feed_dict = { self.eval_phs: pos_hs,
+                    self.eval_prs: pos_rs,
+                    self.eval_pts: pos_ts,
+                    self.eval_prs_mask: pos_rs_mask,
+                    self.eval_candidates: kg_eval.entities_list,
+                    }
+        vals = self.session.run(fetches=fetches, feed_dict=feed_dict)
+        return vals
+
+    def get_rank(self, kg_eval, cur_rel, vals, type, save=False):
+        start = time.time()
+        pos_triples = kg_eval.r_hrt_dict[cur_rel]
+        local_pos_triples = kg_eval.local_r_hrt_dict[cur_rel]
+        triples_num = len(kg_eval.r_hrt_dict[cur_rel])
+        entities_num = kg_eval.entities_num
+        cur_rel_name = kg_eval.id_relations_dict[cur_rel]
+
+        mr, mrr, hits, hits_12_list, hits_21_list = calculate_rank_bidirection(local_pos_triples, vals["distance_t_pred"], vals["distance_h_pred"], self.args.top_k, kg_eval.local_hr_to_multi_t, kg_eval.local_tr_to_multi_h, type)
+
+        if self.args.predict_relation:
+            rel_acc = vals["rel_acc"]
+            print("relation results: valid_rel_acc = {:.4f}, relation:{}, triples: {} ".format(rel_acc, cur_rel_name, triples_num))
+        print("completion results: hits@{} = {}, mr = {:.4f}, mrr = {:.4f}, relation: {}, triples_num: {},  rank_candidates: {}, time = {:.3f} s. ".
+                format(self.args.top_k, hits, mr, mrr, cur_rel_name, triples_num, entities_num, time.time() - start))
+
+        if save:
+            write_rank_to_file(kg_eval, hits_12_list, hits_21_list, kg_eval.local_id_entities_dict,
+                                out_folder=self.out_folder, suffix="{}_{}".format(type, cur_rel_name), pos_triples=pos_triples)
+            if self.args.predict_relation:
+                rd.write_rel_score_to_file(kg_eval, vals["relation_label"], vals["relation_pred"], self.out_folder, type, pos_triples)
+        res = list([type, cur_rel_name, triples_num])
+        hits = hits.tolist()
+        for hit in hits:
+            res.extend([str(hit)]) 
+        res.extend([str(mr)])
+        res.extend([str(mrr)])
+
+        if self.args.predict_relation:
+            res.extend([str(rel_acc)])
+        return res

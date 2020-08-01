@@ -16,7 +16,7 @@ def add_mapping_module(model):
     with tf.name_scope('mapping_loss'):
         model.mapping_loss = model.args.alpha * mapping_loss(tes1, tes2, model.mapping_mat, model.eye_mat)
         model.mapping_optimizer = generate_optimizer(model.mapping_loss, model.args.learning_rate,
-                                                     opt=model.args.optimizer)
+                                                    opt=model.args.optimizer)
 
 
 def add_mapping_variables(model):

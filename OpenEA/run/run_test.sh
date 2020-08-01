@@ -22,5 +22,14 @@
 #CUDA_VISIBLE_DEVICES=7 python main_from_args_test.py args/iptranse_args_15K_rel.json C_S_V6 271_5fold/1/20200624141801/ 0 0 0.08
 #CUDA_VISIBLE_DEVICES=7 python main_from_args_test.py args/iptranse_args_15K_rel.json C_S_V6 271_5fold/1/20200627042700/ 0 0 0.08
 #CUDA_VISIBLE_DEVICES=6 python3 main_from_args_test.py args/iptranse_args_15K_test.json C_S_V0 271_5fold/1/20200705212210/ 0 0 0.08
-CUDA_VISIBLE_DEVICES=6 python main_from_args_test.py args/iptranse_args_15K_test.json C_S_V0 271_5fold/1/20200708125002/ 0 0 0.08
 
+#CUDA_VISIBLE_DEVICES=6 python main_from_args_test.py args/iptranse_args_15K_test.json C_S_V0 271_5fold/1/20200726204442/ 
+
+#CUDA_VISIBLE_DEVICES=6 python main_from_args_test.py args/iptranse_args_15K_test.json C_S_V0 271_5fold/1/20200727170335/ 
+
+CUDA_VISIBLE_DEVICES=6 python main_from_args_test.py args/iptranse_args_15K_test.json C_S_V0 271_5fold/1/20200724163812/ kg12 false  
+
+#CUDA_VISIBLE_DEVICES=6 python main_from_args_test.py args/iptranse_args_15K_test.json C_S_V0 271_5fold/1/20200726204442/ kg12 true 
+
+
+CUDA_VISIBLE_DEVICES=6 python main_from_args_test.py args/iptranse_args_15K_test.json C_S_V0 271_5fold/1/20200723122622/ kg12 true 

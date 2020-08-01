@@ -3,7 +3,6 @@ import os
 import numpy as np
 import pandas as pd
 
-
 def load_embeddings(file_name):
     if os.path.exists(file_name):
         return np.load(file_name)
@@ -416,16 +415,60 @@ def pairs_id2ent(inp_pairs, id1_entities, id2_entities):
         out_pairs.append((ent1, ent2s))
     return out_pairs
 
+#def write_rel_score_to_file(gold_scores, pred_scores, out_folder):
+#    rel_out = list()
+#    for i, (gold_rel, pred_rel) in enumerate(zip(gold_scores, pred_scores)):
+#        gold_rel_id = np.argmax(gold_rel)
+#        pred_rel_id = np.argmax(pred_rel)
+#        score = pred_rel
+#        rel_out.append(((gold_rel_id, pred_rel_id),score))
+#    pair2file(out_folder+"relation_pred_score", rel_out)
 
-
-def write_rel_score_to_file(gold_scores, pred_scores, out_folder):
+def write_rel_score_to_file(kg_eval, gold_scores, pred_scores, out_folder, suffix, pos_triples=None):
     rel_out = list()
-    for i, (gold_rel, pred_rel) in enumerate(zip(gold_scores, pred_scores)):
+    if pos_triples is None:
+        pos_triples = kg_eval.relation_triples_list 
+    id2ent = kg_eval.id_entities_dict
+    id2rel = kg_eval.id_relations_dict
+
+    for i, (triple, gold_rel, pred_rel) in enumerate(zip(pos_triples, gold_scores, pred_scores)):
+        head_id, rel_id, tail_id = triple
+        head = id2ent[head_id]
+        rel = id2rel[rel_id]
+        tail = id2ent[tail_id]
+
         gold_rel_id = np.argmax(gold_rel)
         pred_rel_id = np.argmax(pred_rel)
-        score = pred_rel
-        rel_out.append(((gold_rel_id, pred_rel_id),score))
-    pair2file(out_folder+"relation_pred_score", rel_out)
+        pred_score = pred_rel[pred_rel_id]
+
+        pred_rel = id2rel[pred_rel_id]
+        gold_rel = id2rel[gold_rel_id]
+        assert gold_rel==rel
+
+        rel_out.append((head, rel, tail, pred_rel, pred_score))
+
+    quintuple2file(out_folder+"{}_relation_pred_score".format(suffix), rel_out)
+
+def quintuple2file(file, pairs):
+    if pairs is None:
+        return
+    with open(file, 'w', encoding='utf8') as f:
+        for i, j, k, l, m in pairs:
+            out = "{}\t{}\t{}\t{}\t{}\n".format(i, j, k, l, m)
+            f.write(out)
+        f.close()
+    print("save", file)
+
+def write_relation_mrr_to_file(result, type, out_folder, relation=False):
+    COLUMNS = [type, "relation", "triples_num", "hits1", "hits5", "hits10", "hits50",
+                "mr", "mrr"]
+    if relation:
+        COLUMNS.append("rel-acc")
+    df = pd.DataFrame(result, columns=COLUMNS) 
+    file_name = "{}/{}_relation_mrr.csv".format(out_folder, type)
+    df.to_csv(file_name, index=False)
+    print("save {}".format(file_name))
+
 
 if __name__ == '__main__':
     mydict = {'b': 10, 'c': 10, 'a': 10, 'd': 20}
